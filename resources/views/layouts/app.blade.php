@@ -9,23 +9,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title> @yield('title') </title>
     <link rel="icon" type="image/x-icon" href="{{URL::asset($assetpath .'favicon.ico')}}"/>
-    <link href="{{URL::asset($assetpath .'loader.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{URL::asset($assetpath .'loader.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::asset($assetpath .'loader_dark.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::asset($assetpath .'loader_light.css')}}" rel="stylesheet" type="text/css" />
     <script src="{{URL::asset($assetpath .'loader.js')}}"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="../../../../fonts.googleapis.com/css33d1.css?family=Nunito:400,600,700" rel="stylesheet">
     <link href="{{URL::asset($assetpath .'bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{URL::asset($assetpath .'plugins.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{URL::asset($assetpath .'plugins.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::asset($assetpath .'plugins_dark.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::asset($assetpath .'plugins_light.css')}}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     <link href="{{URL::asset($assetpath .'apexcharts.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{URL::asset($assetpath .'list-group.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{URL::asset($assetpath .'dash_2.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::asset($assetpath .'list-group_light.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{URL::asset($assetpath .'dash_2_light.css')}}" rel="stylesheet" type="text/css" />
 
-    <link href="{{URL::asset($assetpath .'list-group.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{URL::asset($assetpath .'dash_2.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::asset($assetpath .'list-group_dark.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{URL::asset($assetpath .'dash_2_dark.css')}}" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
 </head>
@@ -1653,17 +1653,16 @@
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="{{URL::asset($assetpath .'bootstrap.bundle.min.js')}}"></script>
     <script src="{{URL::asset($assetpath .'perfect-scrollbar.min.js')}}"></script>
-    <script src="https://designreset.com/cork/html/src/plugins/src/mousetrap/mousetrap.min.js"></script>
-    <script src="https://designreset.com/cork/html/src/plugins/src/waves/waves.min.js"></script>
-    <script src="https://designreset.com/cork/html/layouts/modern-light-menu/app.js"></script>
+    <script src="{{URL::asset($assetpath .'mousetrap.min.js')}}"></script>
+    <script src="{{URL::asset($assetpath .'waves.min.js')}}"></script>
+    <script src="{{URL::asset($assetpath .'app.js')}}"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-    <script src="https://designreset.com/cork/html/src/plugins/src/apex/apexcharts.min.js"></script>
-    <script src="https://designreset.com/cork/html/src/assets/js/dashboard/dash_2.js"></script>
+    <script src="{{URL::asset($assetpath .'apexcharts.min.js')}}"></script>
+    <script src="{{URL::asset($assetpath .'dash_2.js')}}"></script>
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 
 </body>
 
-<!-- Mirrored from designreset.com/cork/html/modern-light-menu/index2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Sep 2024 10:56:40 GMT -->
 </html>
