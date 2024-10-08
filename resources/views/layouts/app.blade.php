@@ -13,7 +13,12 @@
     <link href="{{URL::asset($assetpath .'loader_light.css')}}" rel="stylesheet" type="text/css" />
     <script src="{{URL::asset($assetpath .'loader.js')}}"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="../../../../fonts.googleapis.com/css33d1.css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="{{URL::asset($assetpath .'css3d.css')}}" rel="stylesheet">
+    <link href="{{URL::asset($assetpath .'structure_dark.scss')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::asset($assetpath .'structure_light.scss')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::asset($assetpath .'main_dark.scss')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::asset($assetpath .'main_light.scss')}}" rel="stylesheet" type="text/css" />
+    <link href="{{URL::asset($assetpath .'main_light.scss')}}" rel="stylesheet" type="text/css" />
     <link href="{{URL::asset($assetpath .'bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{URL::asset($assetpath .'plugins_dark.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{URL::asset($assetpath .'plugins_light.css')}}" rel="stylesheet" type="text/css" />
@@ -26,8 +31,25 @@
 
     <link href="{{URL::asset($assetpath .'list-group_dark.css')}}" rel="stylesheet" type="text/css">
     <link href="{{URL::asset($assetpath .'dash_2_dark.css')}}" rel="stylesheet" type="text/css" />
-    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+<style media="screen">
+.avatar img {
+width: 100%;
+height: 100%;
+-o-object-fit: cover;
+object-fit: cover;
+}
+
+a {
+
+    text-decoration: none !important;
+
+}
+</style>
 </head>
 <body class=" layout-boxed">
     <!-- BEGIN LOADER -->
