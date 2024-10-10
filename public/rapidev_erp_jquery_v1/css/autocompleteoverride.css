@@ -1,0 +1,62 @@
+.ui-autocomplete {
+    z-index: 5000;
+    max-height: 200px;
+    width:300px;
+    font-size:14px;
+
+    overflow-y: auto;
+      /* prevent horizontal scrollbar */
+     overflow-x: hidden; */
+           /* add padding to account for vertical scrollbar */
+      padding-right: 0px;
+}
+
+.ui-autocomplete.ui-autocomplete350px {
+    width:350px;
+}
+.ui-autocomplete.ui-autocomplete-400px {
+    width:400px;
+}
+.ui-autocomplete.ui-autocomplete-450px {
+    width:450px;
+}
+.ui-autocomplete.ui-autocomplete-500px {
+    width:500px;
+}
+.ui-autocomplete.ui-autocomplete-600px {
+    width:600px;
+}
+.ui-autocomplete.ui-autocomplete-700px {
+    width:700px;
+}
+.ui-autocomplete.ui-autocomplete-800px {
+    width:800px;
+}
+.ui-autocomplete.ui-autocomplete-900px {
+    width:900px;
+}
+.ui-autocomplete.ui-autocomplete-1000px {
+    width:1000px;
+}
+
+
+.ui-autocomplete.ui-autocomplete-font11px
+{
+        font-size:11px;
+}
+.ui-autocomplete.ui-autocomplete-font12px
+{
+        font-size:12px;
+}
+.ui-autocomplete.ui-autocomplete-font13px
+{
+        font-size:13px;
+}
+.ui-autocomplete.ui-autocomplete-font14px
+{
+        font-size:14px;
+}
+.ui-autocomplete.ui-autocomplete-font15px
+{
+        font-size:15px;
+}

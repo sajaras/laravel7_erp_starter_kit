@@ -4,6 +4,7 @@
 <head>
     <?php
     $assetpath = '/theme/assets/';
+    $rapidev_erp_jquery_v1_path = '/rapidev_erp_jquery_v1';
     ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,9 +24,7 @@
     <link href="{{URL::asset($assetpath .'bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{URL::asset($assetpath .'plugins_dark.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{URL::asset($assetpath .'plugins_light.css')}}" rel="stylesheet" type="text/css" />
-    <!-- END GLOBAL MANDATORY STYLES -->
-
-    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+   
     <link href="{{URL::asset($assetpath .'apexcharts.css')}}" rel="stylesheet" type="text/css">
     <link href="{{URL::asset($assetpath .'list-group_light.css')}}" rel="stylesheet" type="text/css">
     <link href="{{URL::asset($assetpath .'dash_2_light.css')}}" rel="stylesheet" type="text/css" />
@@ -36,8 +35,11 @@
     <link href="{{URL::asset($assetpath .'auth-cover_light.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{URL::asset($assetpath .'auth-cover_dark.css')}}" rel="stylesheet" type="text/css" />
 
-    {{-- <link href="https://designreset.com/cork/html/src/assets/css/dark/authentication/auth-cover.css" rel="stylesheet" type="text/css" /> --}}
-    <!-- END GLOBAL MANDATORY STYLES -->
+    <link href="{{URL::asset($rapidev_erp_jquery_v1_path .'/jquery-ui-1.12.1/jquery-ui.min.css')}}" rel="stylesheet" type="text/css" />
+    
+    
+
+        
 
 </head>
 
@@ -88,12 +90,13 @@
 
                                         <h2>Sign In</h2>
                                         <p>Enter your email and password to login</p>
+                                        <p class="text-danger" id="errorMessage"> </p>
 
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">Email</label>
-                                            <input type="email" name="email" class="form-control">
+                                            <input type="email" name="username" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -177,8 +180,31 @@
 
 
     <script src="{{URL::asset($assetpath .'bootstrap.bundle.min.js')}}"></script>
+    <script src="{{URL::asset($rapidev_erp_jquery_v1_path .'/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{URL::asset($rapidev_erp_jquery_v1_path .'/ajaxrequests.js')}}"></script>
+    <script src="{{URL::asset($rapidev_erp_jquery_v1_path .'/main.js')}}"></script>
     
     <script>
+
+
+function checkLogin()
+{
+    var access_token = getCookie('access_token');
+    ajax_request_formless({url:'/api/user',headers:getapiRequestheaders(),method:'get',data:{}},function(result)
+    {
+            if(result.id)
+            {
+                redirectToHome();
+            }
+    });
+
+}
+
+$(document).ready(function () {
+   checkLogin();
+});
+
+
         function login() {
             var loginForm = $("#loginForm")[0];
             var formData = new FormData(loginForm);
@@ -189,104 +215,27 @@
             appenddata.scope = '';
 
           
-            ajax_request_form({formid:'#loginForm',url:'/oauth/token',appenddata:appenddata},function(result){
+            ajax_request_form({errorhandle:"manual",formid:'#loginForm',url:'/oauth/token',appenddata:appenddata,errorcallback:function(response)
+                {
+                    if(response.status == 400 && response.responseJSON.error == "invalid_grant")
+                    {   
+                        $("#errorMessage").text(response.responseJSON.error_description);
+                        
+                    }
+                    
+            }},function(result){
 
-                    console.log(result);
+                   if(result.access_token)
+                   {
+                    setCookie('access_token',result.access_token,result.expires_in);
+                    checkLogin();
+
+                   }
                     
             });
         }
 
-        function ajax_request_form(ajaxparameters, callback) {
-
-            var ajaxdefaults = {
-                url: "",
-                formid: "",
-                type: "post",
-                method: "post",
-                contenttype: false,
-                processdata: false,
-                appenddata: [],
-                databaseerrorfield: "#databaseerror",
-                database_error_modal: "#database_error_modal",
-                dberrorreturnfield: "database_error",
-                dberrormsgheading: "Constraint Violation",
-                dberror_icon: 'error'
-            };
-            ajaxoptions = $.extend(ajaxdefaults, ajaxparameters); // if a perticular option field  in  corresponding js is given then its default option will not be  considered
-
-            var formelement = $(ajaxoptions.formid);
-            var formData = new FormData(formelement[0]);
-
-
-            if (!jQuery.isEmptyObject(ajaxoptions.appenddata)) {
-
-                for (appendkey in ajaxoptions.appenddata) {
-                    formData.append(appendkey, ajaxoptions.appenddata[appendkey]);
-                }
-
-            }
-
-            formData.append("_method", ajaxoptions.method);
-
-            $.ajax({
-                url: ajaxoptions.url,
-                type: ajaxoptions.type,
-                data: formData,
-                contentType: ajaxoptions.contenttype, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-                processData: ajaxoptions.processdata,
-                success: function(data) {
-
-                    if (data.hasOwnProperty('database_error')) {
-
-                        $.toast({
-                            heading: ajaxoptions.dberrormsgheading,
-                            hideAfter: false,
-                            text: data.database_error[2],
-                            allowToastClose: true,
-                            icon: ajaxoptions.dberror_icon
-                        });
-                    } else {
-
-                        return callback(data);
-                    }
-
-
-                },
-                error: function(ts) {
-
-
-                    if (ts.status == 403) {
-                        var responseText = JSON.parse(ts.responseText);
-                        erp_errortoaster({
-                            heading: responseText.message,
-                            text: []
-                        });
-                        // $(ajaxoptions.databaseerrorfield).html(responseText.message);
-                        // $(ajaxoptions.database_error_modal).modal('show');
-
-
-
-                    } else if (ts.status == 401) {
-                        window.location.href = "/login"
-                    } else {
-                        var responseText = JSON.parse(ts.responseText);
-                        erp_errortoaster({
-                            heading: responseText.message,
-                            text: []
-                        });
-                    }
-
-                    if (ajaxoptions.hasOwnProperty('errorcallback')) {
-                        ajaxoptions.errorcallback.call($(this), ts);
-                    }
-
-
-                },
-            });
-
-
-
-        }
+       
     </script>
 
 </body>
