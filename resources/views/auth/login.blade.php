@@ -187,18 +187,7 @@
     <script>
 
 
-function checkLogin()
-{
-    var access_token = getCookie('access_token');
-    ajax_request_formless({url:'/api/user',headers:getapiRequestheaders(),method:'get',data:{}},function(result)
-    {
-            if(result.id)
-            {
-                redirectToHome();
-            }
-    });
 
-}
 
 $(document).ready(function () {
    checkLogin();

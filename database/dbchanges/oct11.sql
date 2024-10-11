@@ -1,0 +1,1 @@
+alter table users add column avatar varchar(500) not null default 'defaultavatar.jpg';

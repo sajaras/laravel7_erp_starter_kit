@@ -72,27 +72,22 @@ line no : 508
 //delete highter cookie on page load
 deletecookie("highlightrow");
 //
-$('form').attr("autocomplete","off");
-$('form').attr("autocomplete","none");
+$('form').attr("autocomplete", "off");
+$('form').attr("autocomplete", "none");
 
 
 
-function setaccordion()
-{
+function setaccordion() {
         var acc = document.getElementsByClassName("accordion");
         var i;
-        for (i = 0; i < acc.length; i++)
-        {
-                acc[i].addEventListener("click", function()
-                {
+        for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function () {
                         this.classList.toggle("active");
                         var panel = this.nextElementSibling;
-                        if(panel.style.maxHeight)
-                        {
+                        if (panel.style.maxHeight) {
                                 panel.style.maxHeight = null;
                         }
-                        else
-                        {
+                        else {
                                 panel.style.maxHeight = panel.scrollHeight + "px";
                         }
                 });
@@ -100,26 +95,23 @@ function setaccordion()
 
 }
 
-function readCookie(name)
-{
+function readCookie(name) {
         var cookiename = name + "=";
         var ca = document.cookie.split(';');
 
-        for(var i=0;i < ca.length;i++)
-        {
+        for (var i = 0; i < ca.length; i++) {
                 var c = ca[i];
-                while (c.charAt(0)==' ') c = c.substring(1,c.length);
-                if (c.indexOf(cookiename) == 0) return c.substring(cookiename.length,c.length);
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(cookiename) == 0) return c.substring(cookiename.length, c.length);
         }
         return null;
 }
 
 setmilmacookies();
 
-function setmilmacookies()
-{
-        $("#org_shortname").text(readCookie("org_shortname")+"::");
-        $("#region_shortname").text(readCookie("region_shortname")+"::");
+function setmilmacookies() {
+        $("#org_shortname").text(readCookie("org_shortname") + "::");
+        $("#region_shortname").text(readCookie("region_shortname") + "::");
         $("#unit_shortname").text(getCookie("unit_name").replace(/\+/g, ' '));
         // var linkactive = $('.navlinkactive').text();
         // var currentpage  = readCookie(linkactive+"csl").replace(/\+/g, ' ');
@@ -142,17 +134,14 @@ function setmilmacookies()
 }
 
 // setting cookie for sidebar remembering
-$(document).on('click','.sidebarlink',function()
-{
+$(document).on('click', '.sidebarlink', function () {
         var navlinkactivetext = $('.navlinkactive').text();
-        document.cookie = navlinkactivetext +"csl="+ $(this).text();
+        document.cookie = navlinkactivetext + "csl=" + $(this).text();
 });
 
-$(document).on('keyup','input[type="date"]',function()
-{
+$(document).on('keyup', 'input[type="date"]', function () {
         var labelelement;
-        if($(this).hasClass("samedivlabel"))
-        {
+        if ($(this).hasClass("samedivlabel")) {
                 labelelement = $(this).next("label");
                 // return;
 
@@ -165,35 +154,30 @@ $(document).on('keyup','input[type="date"]',function()
         var d1 = erpmindate.split("-");
         var d2 = erpmaxdate.split("-");
         var c = $(this).val().split("-");
-        var from = new Date(d1[0], parseInt(d1[1])-1, d1[2]);  // -1 because months are from 0 to 11
-        var to   = new Date(d2[0], parseInt(d2[1])-1, d2[2]);
-        var check = new Date(c[0], parseInt(c[1])-1, c[2]);
-        if(check >= from && check <= to)
-        {
+        var from = new Date(d1[0], parseInt(d1[1]) - 1, d1[2]);  // -1 because months are from 0 to 11
+        var to = new Date(d2[0], parseInt(d2[1]) - 1, d2[2]);
+        var check = new Date(c[0], parseInt(c[1]) - 1, c[2]);
+        if (check >= from && check <= to) {
 
         }
-        else
-        {
+        else {
 
                 labelelement.text("**");
-                labelelement.attr("style","color:red;");
+                labelelement.attr("style", "color:red;");
         }
 
 });
 
 
-function setarrowtable()
-{
+function setarrowtable() {
         $(arguments[0]).arrowTable({
-                enabledKeys: ['up','left','right','down'],
+                enabledKeys: ['up', 'left', 'right', 'down'],
                 focusTarget: 'input, select',
-                listenTarget:'input, select ',
-                beforeMove: function(input, targetFinder, direction)
-                {
+                listenTarget: 'input, select ',
+                beforeMove: function (input, targetFinder, direction) {
                         // Determine the target
                         var target = targetFinder();
-                        if (direction === 'down' && $(".ui-autocomplete.ui-widget").is(":visible"))
-                        {
+                        if (direction === 'down' && $(".ui-autocomplete.ui-widget").is(":visible")) {
 
                                 // Don't allow move
                                 return false;
@@ -259,41 +243,31 @@ function setarrowtable()
 
 
 
-function toupperonkeyup()
-{
-        $(document).on('focusout',arguments[0],function()
-        {
+function toupperonkeyup() {
+        $(document).on('focusout', arguments[0], function () {
                 this.value = this.value.toLocaleUpperCase();
         });
 }
 
-function toloweronkeyup()
-{
-        $(document).on('focusout',arguments[0],function()
-        {
+function toloweronkeyup() {
+        $(document).on('focusout', arguments[0], function () {
                 this.value = this.value.toLocaleLowerCase();
         });
 }
 
-function clearhtmls()
-{
-        for(var i=0;i<arguments.length;i++)
-        {
+function clearhtmls() {
+        for (var i = 0; i < arguments.length; i++) {
 
                 $(arguments[i]).html('');
         }
 }
-function clearvals()
-{
-        for(var i=0;i<arguments.length;i++)
-        {
+function clearvals() {
+        for (var i = 0; i < arguments.length; i++) {
                 $(arguments[i]).val('');
         }
 }
-function cleartexts()
-{
-        for(var i=0;i<arguments.length;i++)
-        {
+function cleartexts() {
+        for (var i = 0; i < arguments.length; i++) {
                 $(arguments[i]).text('');
         }
 }
@@ -303,29 +277,26 @@ function cleartexts()
 
 
 // autofucusing autofocus enabled field in modals
-$(document).ready(function()
-{
-        $('#addmodal').on('shown.bs.modal', function()
-        {
+$(document).ready(function () {
+        $('#addmodal').on('shown.bs.modal', function () {
                 $(this).find('[autofocus]').focus();
         });
 
-        $('#addressaddmodal').on('shown.bs.modal', function()
-        {
-                $(this).find('[autofocus]').focus();
-        });
-
-
-        $('#addindentmodal').on('shown.bs.modal', function() {
-                $(this).find('[autofocus]').focus();
-        });
-
-        $('#bulkindnetmodal').on('shown.bs.modal', function() {
+        $('#addressaddmodal').on('shown.bs.modal', function () {
                 $(this).find('[autofocus]').focus();
         });
 
 
-        $('#paymentmodal').on('shown.bs.modal', function() {
+        $('#addindentmodal').on('shown.bs.modal', function () {
+                $(this).find('[autofocus]').focus();
+        });
+
+        $('#bulkindnetmodal').on('shown.bs.modal', function () {
+                $(this).find('[autofocus]').focus();
+        });
+
+
+        $('#paymentmodal').on('shown.bs.modal', function () {
                 $(this).find('[autofocus]').focus();
         });
 
@@ -333,30 +304,25 @@ $(document).ready(function()
 });
 
 
-function en_submitbutton_if_filled()
-{
-        $(arguments[1]).attr("disabled","disabled");
-        $(arguments[1]).prop("disabled",true);
+function en_submitbutton_if_filled() {
+        $(arguments[1]).attr("disabled", "disabled");
+        $(arguments[1]).prop("disabled", true);
         var datecheckfields = $(arguments[0]);
-        var allfilled=1;
-        for(var i = 0; i < datecheckfields.length; i++)
-        {
-                if($(datecheckfields[i]).val() =="")
-                {
-                        allfilled=0;
+        var allfilled = 1;
+        for (var i = 0; i < datecheckfields.length; i++) {
+                if ($(datecheckfields[i]).val() == "") {
+                        allfilled = 0;
                 }
         }
-        if(allfilled == 1)
-        {
+        if (allfilled == 1) {
                 $(arguments[1]).removeAttr('disabled');
-                $(arguments[1]).prop("disabled",false);
+                $(arguments[1]).prop("disabled", false);
         }
 }
 
-function substractDate(convertdate,noofdays)
-{
+function substractDate(convertdate, noofdays) {
         var date = new Date(convertdate);
-        date.setDate( date.getDate() - noofdays );
+        date.setDate(date.getDate() - noofdays);
         var month = date.getMonth() + 1;
         var twodigitmonth = ("0" + month).slice(-2);
         var day = date.getDate();
@@ -364,10 +330,9 @@ function substractDate(convertdate,noofdays)
         var year = date.getFullYear();
         return year + "-" + twodigitmonth + "-" + twodigitdays;
 }
-function addDate(convertdate,noofdays)
-{
+function addDate(convertdate, noofdays) {
         var date = new Date(convertdate);
-        date.setDate( date.getDate() + noofdays );
+        date.setDate(date.getDate() + noofdays);
         var month = date.getMonth() + 1;
         var twodigitmonth = ("0" + month).slice(-2);
         var day = date.getDate();
@@ -378,13 +343,11 @@ function addDate(convertdate,noofdays)
 
 
 /* locks,multiple tab windows handling functions */
-function checklock(element,event_name)
-{
+function checklock(element, event_name) {
         var modalid = $(element).data("target");
         var url = "/acesslock/" + event_name;
-        $.get(url,function(data){
-                if(data ==1)
-                {
+        $.get(url, function (data) {
+                if (data == 1) {
                         $(modalid).modal('show');
                 }
                 else {
@@ -392,14 +355,14 @@ function checklock(element,event_name)
                         $("#modalmessage").text("This event is in use by someone in your unit.please wait till the lock has been released");
                         $("#messagemodal").modal('show');
                 }
-        }).fail(function(ts) {
-                alert( ts.responseText );
+        }).fail(function (ts) {
+                alert(ts.responseText);
         });
 }
 
-function associativearrayjoin(array,key,seperator) {
+function associativearrayjoin(array, key, seperator) {
 
-        return  array.map(function(elem){
+        return array.map(function (elem) {
                 return elem[key];
         }).join(seperator);
 }
@@ -409,21 +372,21 @@ function round(value, precision) {
         return Math.round(value * multiplier) / multiplier;
 }
 
-$(window).on("beforeunload", function() {
+$(window).on("beforeunload", function () {
 
-        $.get("/releaselocksinpage",function(data){
+        $.get("/releaselocksinpage", function (data) {
 
         })
 });
 
 // for disabling back and forward buttons
-jQuery(document).ready(function($) {
+jQuery(document).ready(function ($) {
 
         if (window.history && window.history.pushState) {
 
                 window.history.pushState('forward', null, null);
 
-                $(window).on('popstate', function() {
+                $(window).on('popstate', function () {
                         $("#msgtitle").text("WARNING");
                         $("#modalmessage").text(" Back and forward buttons are not allowed.");
                         $("#messagemodal").modal('show');
@@ -440,28 +403,23 @@ function deletecookie(name) {
 
 
 // helper function to set cookies
-function setCookie(cname, cvalue, seconds)
-{
+function setCookie(cname, cvalue, seconds) {
         var d = new Date();
         d.setTime(d.getTime() + (seconds * 1000));
-        var expires = "expires="+ d.toUTCString();
+        var expires = "expires=" + d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-function getCookie(cname)
-{
+function getCookie(cname) {
         var name = cname + "=";
         var decodedCookie = decodeURIComponent(document.cookie);
         var ca = decodedCookie.split(';');
-        for(var i = 0; i < ca.length; i++)
-        {
+        for (var i = 0; i < ca.length; i++) {
                 var c = ca[i];
-                while (c.charAt(0) == ' ')
-                {
+                while (c.charAt(0) == ' ') {
                         c = c.substring(1);
                 }
-                if (c.indexOf(name) == 0)
-                {
+                if (c.indexOf(name) == 0) {
                         return c.substring(name.length, c.length);
                 }
         }
@@ -470,34 +428,27 @@ function getCookie(cname)
 
 // Do not allow multiple call center tabs
 
-$(window).on('beforeunload onbeforeunload', function()
-{
+$(window).on('beforeunload onbeforeunload', function () {
         document.cookie = 'ic_window_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 });
 
-function validateCallCenterTab()
-{
+function validateCallCenterTab() {
         var win_id_cookie_duration = 10; // in seconds
-        if (!window.name)
-        {
+        if (!window.name) {
                 window.name = Math.random().toString();
         }
-        if (!getCookie('ic_window_id') || window.name === getCookie('ic_window_id'))
-        {
+        if (!getCookie('ic_window_id') || window.name === getCookie('ic_window_id')) {
                 // This means they are using just one tab. Set/clobber the cookie to prolong the tab's validity.
                 setCookie('ic_window_id', window.name, win_id_cookie_duration);
         }
-        else if(getCookie('ic_window_id') !== window.name)
-        {
+        else if (getCookie('ic_window_id') !== window.name) {
                 formdata = $('#logout-form').serialize();
                 $.ajax({
-                        url:'/logout',
-                        type:'post',
-                        data:formdata,
-                        success:function(data)
-                        {
-                                if(data ==1)
-                                {
+                        url: '/logout',
+                        type: 'post',
+                        data: formdata,
+                        success: function (data) {
+                                if (data == 1) {
                                         window.open('/');
                                 }
 
@@ -508,7 +459,7 @@ function validateCallCenterTab()
                 });
                 // this means another browser tab is open, alert them to close the tabs until there is only one remaining
                 var message = 'You cannot have this website open in multiple tabs. ' +
-                'Please close them until there is only one remaining. Thanks!';
+                        'Please close them until there is only one remaining. Thanks!';
                 $('html').html(message);
                 clearInterval(callCenterInterval);
                 // throw 'Multiple call center tabs error. Program terminating.';
@@ -518,29 +469,25 @@ function validateCallCenterTab()
 
 var urlParams = new URLSearchParams(window.location.search);
 console.log(urlParams);
-if(urlParams.has('from'))
-{
-        var exeptionlist =  ['datalock','routeshift','drcr','invoice'];
-        var currenturl  =  location.href.split("?")[0].split("/")[3];
-        if(exeptionlist.indexOf(currenturl) == -1)
-        {
+if (urlParams.has('from')) {
+        var exeptionlist = ['datalock', 'routeshift', 'drcr', 'invoice'];
+        var currenturl = location.href.split("?")[0].split("/")[3];
+        if (exeptionlist.indexOf(currenturl) == -1) {
 
                 callCenterInterval = setInterval(validateCallCenterTab, 1000);
 
         }
 
 }
-else if(urlParams.has('viewmode'))
-{
+else if (urlParams.has('viewmode')) {
 
-        allowedviewmodes = ['reportsinnewtab','mastersinnewtab','externallink'];
+        allowedviewmodes = ['reportsinnewtab', 'mastersinnewtab', 'externallink'];
         var newurl;
         // var viewmodeval  =  location.href.split("?")[1].split("=")[1];
-        var viewmodeval =urlParams.get('viewmode');
+        var viewmodeval = urlParams.get('viewmode');
 
 
-        if(allowedviewmodes.indexOf(viewmodeval) > -1)
-        {
+        if (allowedviewmodes.indexOf(viewmodeval) > -1) {
 
                 $("#link0").removeClass('d-none');
                 $("#link0").text('You are now in sub tab');
@@ -556,21 +503,19 @@ else if(urlParams.has('viewmode'))
                 // $('.sidebarfactors').attr("style","top:0%;");
 
 
-                if(viewmodeval == "reportsinnewtab" || viewmodeval == 'mastersinnewtab')
-                {
+                if (viewmodeval == "reportsinnewtab" || viewmodeval == 'mastersinnewtab') {
 
-                        $('.sidebar-menu').find('a').each(function(){
+                        $('.sidebar-menu').find('a').each(function () {
                                 var currentlink = $(this);
-                                if(currentlink.attr("id") != "latestactionslink")
-                                {
-                                        newurl = currentlink.attr("href")+"&viewmode="+viewmodeval;
-                                        currentlink.attr("href",newurl);
+                                if (currentlink.attr("id") != "latestactionslink") {
+                                        newurl = currentlink.attr("href") + "&viewmode=" + viewmodeval;
+                                        currentlink.attr("href", newurl);
 
                                 }
                         });
                 }
                 else {
-                        $(".navbar-fixed-left").attr("style","display:none;");
+                        $(".navbar-fixed-left").attr("style", "display:none;");
                 }
 
         }
@@ -580,19 +525,17 @@ else {
         var commonexeption = "ParamReports";
         var overridingreportexception = "/reports/overridingratetypereport";
         var latestactionexception = "/latestactions";
-        var currenturlelements  =  location.href.split("/");
-        if(currenturlelements.indexOf(commonexeption) == -1 && location.href.indexOf(overridingreportexception) == -1 && location.href.indexOf(latestactionexception) == -1)
-        {
+        var currenturlelements = location.href.split("/");
+        if (currenturlelements.indexOf(commonexeption) == -1 && location.href.indexOf(overridingreportexception) == -1 && location.href.indexOf(latestactionexception) == -1) {
 
                 callCenterInterval = setInterval(validateCallCenterTab, 1000);
         }
 }
 
-if(urlParams.has('from'))
-{
+if (urlParams.has('from')) {
         var from = urlParams.get('from').split("/");
 
-        $("#backto").append("<a id='backtobutton' onclick='window.close();' class='btn selectionlist'>Go back to "+from[1]+"</a>")
+        $("#backto").append("<a id='backtobutton' onclick='window.close();' class='btn selectionlist'>Go back to " + from[1] + "</a>")
 }
 
 /*  end of locks,multiple tab windows handling functions */
@@ -622,21 +565,20 @@ jQuery.fn.extend({
 
         keyboardnavigate: function (options) {
 
-                var defaults = {tableid:"#thispagetable",tdclass:".thisrow"};
+                var defaults = { tableid: "#thispagetable", tdclass: ".thisrow" };
                 options = $.extend(defaults, options);
 
-                window.addEventListener("keydown", function(e) {
+                window.addEventListener("keydown", function (e) {
                         // space and arrow keys
-                        if([38,40].indexOf(e.keyCode) > -1) {
+                        if ([38, 40].indexOf(e.keyCode) > -1) {
                                 e.preventDefault();
                                 var y = $(options.scrollarea).scrollTop();
-                                if(e.keyCode == 38)
-                                {
+                                if (e.keyCode == 38) {
                                         //your current y position on the page
-                                        $(options.scrollarea).scrollTop(y-options.scrolldistance);
+                                        $(options.scrollarea).scrollTop(y - options.scrolldistance);
                                 }
-                                else if (e.keyCode ==40) {
-                                        $(options.scrollarea).scrollTop(y+options.scrolldistance);
+                                else if (e.keyCode == 40) {
+                                        $(options.scrollarea).scrollTop(y + options.scrolldistance);
                                 }
 
 
@@ -644,21 +586,19 @@ jQuery.fn.extend({
                 }, false);
 
                 // User clicks on a cell
-                $(document).on('click',options.tdclass,function(){
-                        var rowincookie =  getCookie("highlightrow");
-                        if(rowincookie)
-                        {
+                $(document).on('click', options.tdclass, function () {
+                        var rowincookie = getCookie("highlightrow");
+                        if (rowincookie) {
 
-                                $(options.tableid+" tbody tr").eq(rowincookie).removeClass('highlighten');
+                                $(options.tableid + " tbody tr").eq(rowincookie).removeClass('highlighten');
                                 deletecookie("highlightrow");
                         }
 
-                        if(c)
-                        {
+                        if (c) {
                                 c.closest('tr').removeClass('rowselected');
                         }
                         currCell = $(this);
-                        c= $(this);
+                        c = $(this);
                         c.closest('tr').addClass('rowselected');
 
 
@@ -666,16 +606,14 @@ jQuery.fn.extend({
 
 
                 // User navigates table using keyboard
-                $(document).on('keydown',options.tableid,function(e){
-                        if(!c)
-                        {
-                                c= $(options.tableid +"tbody").find('tr td').eq(0);
+                $(document).on('keydown', options.tableid, function (e) {
+                        if (!c) {
+                                c = $(options.tableid + "tbody").find('tr td').eq(0);
                                 c.closest('tr').addClass('rowselected');
                         }
                         // $(this).trigger('click');
                         // $(options.tableid).keydown(function (e) {
-                        if (typeof e.which !== 'undefined')
-                        {
+                        if (typeof e.which !== 'undefined') {
 
                                 c.closest('tr').removeClass('rowselected');
                         }
@@ -690,12 +628,12 @@ jQuery.fn.extend({
                         if (e.which == 38) {
                                 // Up Arrow
                                 c = currCell.closest('tr').prev().find('td:eq(' +
-                                currCell.index() + ')');
+                                        currCell.index() + ')');
                                 currCell.closest('tr').prev().addClass('rowselected');
                         } else if (e.which == 40) {
                                 // Down Arrow
                                 c = currCell.closest('tr').next().find('td:eq(' +
-                                currCell.index() + ')');
+                                        currCell.index() + ')');
                                 currCell.closest('tr').next().addClass('rowselected');
                         } else if ((e.which == 13 || e.which == 32)) {
                                 // Enter or Spacebar - edit cell
@@ -721,11 +659,10 @@ jQuery.fn.extend({
                 });
 
 
-                $(document).on('mouseover',options.tdclass,function(){
+                $(document).on('mouseover', options.tdclass, function () {
 
-                        var rowincookie =  getCookie("highlightrow");
-                        if(!rowincookie)
-                        {
+                        var rowincookie = getCookie("highlightrow");
+                        if (!rowincookie) {
                                 // $(this).closest('tr').find('td').eq(options.tabindexcol).trigger('click');
                                 // $(options.tableid).trigger('keydown');
                         }
@@ -745,26 +682,24 @@ jQuery.fn.extend({
 // 80 : ctrl + P
 // 67 : ctrl + C
 
-var modalshortcuts ={65:".shortcutsave",83:".shortcutsaveandnext",68:".shortcutdelete",69:".shortcutexit",80:".shortcutprint",67:"shorcutclear"};
+var modalshortcuts = { 65: ".shortcutsave", 83: ".shortcutsaveandnext", 68: ".shortcutdelete", 69: ".shortcutexit", 80: ".shortcutprint", 67: "shorcutclear" };
 
 
 
-$(document).on( "keydown",function(e){
+$(document).on("keydown", function (e) {
 
         // if (!e.metaKey) {
         // we.preventDefault();
         // }
 
 
-        if((e.ctrlKey && e.keyCode ==65) || (e.ctrlKey && e.keyCode ==83) || (e.ctrlKey && e.keyCode ==68) || (e.ctrlKey && e.keyCode ==69) || (e.ctrlKey && e.keyCode ==80)  )
-        {
+        if ((e.ctrlKey && e.keyCode == 65) || (e.ctrlKey && e.keyCode == 83) || (e.ctrlKey && e.keyCode == 68) || (e.ctrlKey && e.keyCode == 69) || (e.ctrlKey && e.keyCode == 80)) {
 
                 e.preventDefault();
 
                 var currentmodal = $(document).find('.show');
 
-                if(currentmodal.length > 0)
-                {
+                if (currentmodal.length > 0) {
                         // $(currentmodal.attr("id"));
 
                         currentmodal.find(modalshortcuts[e.keyCode]).trigger('click');
@@ -826,7 +761,7 @@ function timerIncrement() {
         // idleTime = localStorage.idleTime;
         idleTime = idleTime + 1;
         localStorage.idleTime = -1;
-        console.log("Incrementidletime",idleTime);
+        console.log("Incrementidletime", idleTime);
         // localStorage.idleTime = parseInt(idleTime);
         if (idleTime > 15) { // 30 minutes
                 localStorage.idleTime = idleTime;
@@ -838,19 +773,17 @@ function timerIncrement() {
 
 
 
-function set_autocomplete_default(property)
-{
-        if(property.variablename.length==1){
+function set_autocomplete_default(property) {
+        if (property.variablename.length == 1) {
                 $(property.idfield).val(property.variablename[0][property.idfieldval]);
                 $(property.hiddenfield).val(property.variablename[0][property.hiddenfieldval]);
                 $(property.superentity).text(property.variablename[0][property.superentitytext]);
-                set_disable("*",1,property.idfield);
+                set_disable("*", 1, property.idfield);
         }
 }
 
-function set_autocompletedynamic_default(property)
-{
-        if(property.variablename.length==1){
+function set_autocompletedynamic_default(property) {
+        if (property.variablename.length == 1) {
                 property.row.find(property.idfield).val(property.variablename[0][property.idfieldval]);
                 property.row.find(property.hiddenfield).val(property.variablename[0][property.hiddenfieldval]);
                 property.row.find(property.superentity).val(property.variablename[0][property.superentitytext]);
@@ -872,18 +805,18 @@ function formatDate(dateval) {
         var monthIndex = date.getMonth();
         var year = date.getFullYear();
 
-        return ("0" + (day)).slice(-2) + '-' + ("0" + (monthIndex+1)).slice(-2) + '-' + year;
+        return ("0" + (day)).slice(-2) + '-' + ("0" + (monthIndex + 1)).slice(-2) + '-' + year;
 }
 
 function begin_fyear(date) {
         var begin_fyear;
         var date = new Date(date);
-        var month = date.getMonth()+1;
+        var month = date.getMonth() + 1;
         var year = date.getFullYear();
-        if(month > 3){
-                begin_fyear = year+'-04-01';
-        }else{
-                begin_fyear = (year-1)+'-04-01';
+        if (month > 3) {
+                begin_fyear = year + '-04-01';
+        } else {
+                begin_fyear = (year - 1) + '-04-01';
         }
         return begin_fyear;
 }
@@ -891,22 +824,21 @@ function begin_fyear(date) {
 function end_fyear(date) {
         var end_fyear;
         var date = new Date(date);
-        var month = date.getMonth()+1;
+        var month = date.getMonth() + 1;
         var year = date.getFullYear();
-        if(month > 3){
-                end_fyear = (year+1)+'-03-31';
-        }else{
-                end_fyear = year+'-03-31';
+        if (month > 3) {
+                end_fyear = (year + 1) + '-03-31';
+        } else {
+                end_fyear = year + '-03-31';
         }
         return end_fyear;
 }
 
 
-function startofmonthsbetweentwodates(startdate,enddate)
-{
+function startofmonthsbetweentwodates(startdate, enddate) {
         var setofdates = [];
         var enddate = new Date(enddate);
-        var startdate = currentloopdate  = new Date(startdate);
+        var startdate = currentloopdate = new Date(startdate);
         var year = startdate.getFullYear();
         var month = startdate.getMonth();
 
@@ -916,22 +848,19 @@ function startofmonthsbetweentwodates(startdate,enddate)
 
 
 
-        for(i=0;currentloopdate.getTime() <= enddate.getTime();i++)
-        {
+        for (i = 0; currentloopdate.getTime() <= enddate.getTime(); i++) {
 
 
-                setofdates.push(currentloopdate.getFullYear()+'-'+("0" + (currentloopdate.getMonth()+1)).slice(-2)+'-01');
+                setofdates.push(currentloopdate.getFullYear() + '-' + ("0" + (currentloopdate.getMonth() + 1)).slice(-2) + '-01');
 
-                if(month == 11)
-                {
+                if (month == 11) {
                         month = 0;
                         year = year + 1;
                 }
-                else
-                {
+                else {
                         month++;
                 }
-                currentloopdate  = new Date(year,month, 1);
+                currentloopdate = new Date(year, month, 1);
 
         }
 
@@ -941,8 +870,7 @@ function startofmonthsbetweentwodates(startdate,enddate)
 }
 
 
-function roundandshowastwodecimalplaces(num)
-{
+function roundandshowastwodecimalplaces(num) {
 
         return (Math.round(num * 100) / 100).toFixed(2);
 
@@ -954,7 +882,7 @@ function begin_month(rdate) {
         var date = new Date(rdate);
         y = date.getFullYear(), m = date.getMonth();
         var firstDay = new Date(y, m, 1);
-        return firstDay.getFullYear() + '-' +  ("0" + (firstDay.getMonth()+1)).slice(-2) + '-' +  ("0" + (firstDay.getDate())).slice(-2);
+        return firstDay.getFullYear() + '-' + ("0" + (firstDay.getMonth() + 1)).slice(-2) + '-' + ("0" + (firstDay.getDate())).slice(-2);
 
 
 }
@@ -964,13 +892,12 @@ function end_month(rdate) {
         var date = new Date(rdate);
         y = date.getFullYear(), m = date.getMonth();
         var lastDay = new Date(y, m + 1, 0);
-        return lastDay.getFullYear() + '-'+ ("0" + (lastDay.getMonth()+1)).slice(-2) +'-' +   ("0" + (lastDay.getDate())).slice(-2);
+        return lastDay.getFullYear() + '-' + ("0" + (lastDay.getMonth() + 1)).slice(-2) + '-' + ("0" + (lastDay.getDate())).slice(-2);
 
 }
 
 
-function diffdays(d2,d1)
-{
+function diffdays(d2, d1) {
         const date2 = new Date(d2);
         const date1 = new Date(d1);
         const diffTime = (date2 - date1);
@@ -979,8 +906,7 @@ function diffdays(d2,d1)
 }
 
 
-function standarddateformat(d)
-{
+function standarddateformat(d) {
 
         return d.split("-").reverse().join("-");
 }
@@ -990,11 +916,11 @@ function standarddateformat(d)
 function getmonthname(date) {
 
         const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-];
+                "July", "August", "September", "October", "November", "December"
+        ];
 
-const d = new Date(date);
-return monthNames[d.getMonth()];
+        const d = new Date(date);
+        return monthNames[d.getMonth()];
 
 }
 function getyear(date) {
@@ -1007,8 +933,8 @@ function getyear(date) {
 function endOfMonth(date) {
 
         var date = new Date(date);
-        var monthend     =   new Date(date.getFullYear(),date.getMonth() + 1, 0);
-        return monthend.getFullYear() + '-'+ ("0" + (monthend.getMonth()+1)).slice(-2) +'-' +   ("0" + (monthend.getDate())).slice(-2);
+        var monthend = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        return monthend.getFullYear() + '-' + ("0" + (monthend.getMonth() + 1)).slice(-2) + '-' + ("0" + (monthend.getDate())).slice(-2);
 
 
 
@@ -1016,24 +942,23 @@ function endOfMonth(date) {
 function startOfMonth(date) {
 
         var date = new Date(date);
-        var monthend     =   new Date(date.getFullYear(),date.getMonth(), 1);
-        return monthend.getFullYear() + '-'+ ("0" + (monthend.getMonth()+1)).slice(-2) +'-' +   ("0" + (monthend.getDate())).slice(-2);
+        var monthend = new Date(date.getFullYear(), date.getMonth(), 1);
+        return monthend.getFullYear() + '-' + ("0" + (monthend.getMonth() + 1)).slice(-2) + '-' + ("0" + (monthend.getDate())).slice(-2);
 
 }
 
 
-function arraymergeremovingduplicates(array1,array2) {
+function arraymergeremovingduplicates(array1, array2) {
 
         var result_array = [];
         var arr = array1.concat(array2);
         var len = arr.length;
         var assoc = {};
 
-        while(len--) {
+        while (len--) {
                 var item = arr[len];
 
-                if(!assoc[item])
-                {
+                if (!assoc[item]) {
                         result_array.unshift(item);
                         assoc[item] = true;
                 }
@@ -1043,18 +968,16 @@ function arraymergeremovingduplicates(array1,array2) {
 }
 
 
-$(document).on('keyup','.allowonlytwodecimalplaces',function () {
+$(document).on('keyup', '.allowonlytwodecimalplaces', function () {
         var element = $(this);
         value = element.val();
         decimal = value.split(".");
-        if(isNumeric(value) && decimal.length > 1 &&  decimal[1].length > 2 )
-        {
+        if (isNumeric(value) && decimal.length > 1 && decimal[1].length > 2) {
 
-                finalval  = parseFloat(element.val(),10).toFixed(2);
+                finalval = parseFloat(element.val(), 10).toFixed(2);
                 element.val(finalval);
         }
-        else if(!isNumeric(value))
-        {
+        else if (!isNumeric(value)) {
                 finalval = '';
                 element.val(finalval);
         }
@@ -1066,91 +989,89 @@ $(document).on('keyup','.allowonlytwodecimalplaces',function () {
 function rupeewords(num) {
 
 
-var splittedNum =num.toString().split('.');
-var nonDecimal=splittedNum[0];
-var numberpart = rupee_in_words(Number(nonDecimal));
-var decimalpart = '';
-if(splittedNum.length == 2)
-{
-        var decimal=splittedNum[1].length==1?(splittedNum[1]+0):splittedNum[1];
-         decimalpart =  "and" + rupee_in_words(Number(decimal)) +"paise" ;
+        var splittedNum = num.toString().split('.');
+        var nonDecimal = splittedNum[0];
+        var numberpart = rupee_in_words(Number(nonDecimal));
+        var decimalpart = '';
+        if (splittedNum.length == 2) {
+                var decimal = splittedNum[1].length == 1 ? (splittedNum[1] + 0) : splittedNum[1];
+                decimalpart = "and" + rupee_in_words(Number(decimal)) + "paise";
 
-}
-return  numberpart + decimalpart;
+        }
+        return numberpart + decimalpart;
 
 
 }
 
 function rupee_in_words(price) {
-  var sglDigit = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"],
-    dblDigit = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"],
-    tensPlace = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"],
-    handle_tens = function(dgt, prevDgt) {
-      return 0 == dgt ? "" : " " + (1 == dgt ? dblDigit[prevDgt] : tensPlace[dgt])
-    },
-    handle_utlc = function(dgt, nxtDgt, denom) {
-      return (0 != dgt && 1 != nxtDgt ? " " + sglDigit[dgt] : "") + (0 != nxtDgt || dgt > 0 ? " " + denom : "")
-    };
+        var sglDigit = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"],
+                dblDigit = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"],
+                tensPlace = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"],
+                handle_tens = function (dgt, prevDgt) {
+                        return 0 == dgt ? "" : " " + (1 == dgt ? dblDigit[prevDgt] : tensPlace[dgt])
+                },
+                handle_utlc = function (dgt, nxtDgt, denom) {
+                        return (0 != dgt && 1 != nxtDgt ? " " + sglDigit[dgt] : "") + (0 != nxtDgt || dgt > 0 ? " " + denom : "")
+                };
 
-  var str = "",
-    digitIdx = 0,
-    digit = 0,
-    nxtDigit = 0,
-    words = [];
-  if (price += "", isNaN(parseInt(price))) str = "";
-  else if (parseInt(price) > 0 && price.length <= 10) {
-    for (digitIdx = price.length - 1; digitIdx >= 0; digitIdx--) switch (digit = price[digitIdx] - 0, nxtDigit = digitIdx > 0 ? price[digitIdx - 1] - 0 : 0, price.length - digitIdx - 1) {
-      case 0:
-        words.push(handle_utlc(digit, nxtDigit, ""));
-        break;
-      case 1:
-        words.push(handle_tens(digit, price[digitIdx + 1]));
-        break;
-      case 2:
-        words.push(0 != digit ? " " + sglDigit[digit] + " Hundred" + (0 != price[digitIdx + 1] && 0 != price[digitIdx + 2] ? " and" : "") : "");
-        break;
-      case 3:
-        words.push(handle_utlc(digit, nxtDigit, "Thousand"));
-        break;
-      case 4:
-        words.push(handle_tens(digit, price[digitIdx + 1]));
-        break;
-      case 5:
-        words.push(handle_utlc(digit, nxtDigit, "Lakh"));
-        break;
-      case 6:
-        words.push(handle_tens(digit, price[digitIdx + 1]));
-        break;
-      case 7:
-        words.push(handle_utlc(digit, nxtDigit, "Crore"));
-        break;
-      case 8:
-        words.push(handle_tens(digit, price[digitIdx + 1]));
-        break;
-      case 9:
-        words.push(0 != digit ? " " + sglDigit[digit] + " Hundred" + (0 != price[digitIdx + 1] || 0 != price[digitIdx + 2] ? " and" : " Crore") : "")
-    }
-    str = words.reverse().join("")
-  } else str = "";
-  return str
+        var str = "",
+                digitIdx = 0,
+                digit = 0,
+                nxtDigit = 0,
+                words = [];
+        if (price += "", isNaN(parseInt(price))) str = "";
+        else if (parseInt(price) > 0 && price.length <= 10) {
+                for (digitIdx = price.length - 1; digitIdx >= 0; digitIdx--) switch (digit = price[digitIdx] - 0, nxtDigit = digitIdx > 0 ? price[digitIdx - 1] - 0 : 0, price.length - digitIdx - 1) {
+                        case 0:
+                                words.push(handle_utlc(digit, nxtDigit, ""));
+                                break;
+                        case 1:
+                                words.push(handle_tens(digit, price[digitIdx + 1]));
+                                break;
+                        case 2:
+                                words.push(0 != digit ? " " + sglDigit[digit] + " Hundred" + (0 != price[digitIdx + 1] && 0 != price[digitIdx + 2] ? " and" : "") : "");
+                                break;
+                        case 3:
+                                words.push(handle_utlc(digit, nxtDigit, "Thousand"));
+                                break;
+                        case 4:
+                                words.push(handle_tens(digit, price[digitIdx + 1]));
+                                break;
+                        case 5:
+                                words.push(handle_utlc(digit, nxtDigit, "Lakh"));
+                                break;
+                        case 6:
+                                words.push(handle_tens(digit, price[digitIdx + 1]));
+                                break;
+                        case 7:
+                                words.push(handle_utlc(digit, nxtDigit, "Crore"));
+                                break;
+                        case 8:
+                                words.push(handle_tens(digit, price[digitIdx + 1]));
+                                break;
+                        case 9:
+                                words.push(0 != digit ? " " + sglDigit[digit] + " Hundred" + (0 != price[digitIdx + 1] || 0 != price[digitIdx + 2] ? " and" : " Crore") : "")
+                }
+                str = words.reverse().join("")
+        } else str = "";
+        return str
 
 }
 
 
-$(document).on('keyup','.nonewline',function (e) {
-    if (e.keyCode == 13)
-    {
-            $(this).val($(this).val().replace(/\n/g, " ")) ;
-            $(this).text($(this).text().replace(/\n/g, " ")) ;
+$(document).on('keyup', '.nonewline', function (e) {
+        if (e.keyCode == 13) {
+                $(this).val($(this).val().replace(/\n/g, " "));
+                $(this).text($(this).text().replace(/\n/g, " "));
 
-    }
+        }
 
 });
 
 
 
 function getapiRequestheaders() {
-        
+
         var headers = {};
         headers['Authorization'] = 'Bearer ' + getCookie('access_token');
         headers['Accept'] = 'application/json';
@@ -1158,6 +1079,24 @@ function getapiRequestheaders() {
 }
 
 
-function  redirectToHome(){
+function redirectToHome() {
         window.location.href = '/home';
+}
+function redirectToLogin() {
+        window.location.href = '/login';
+}
+
+
+
+function checkLogin()
+{
+    var access_token = getCookie('access_token');
+    ajax_request_formless({url:'/api/user',headers:getapiRequestheaders(),method:'get',data:{}},function(result)
+    {
+            if(result.id)
+            {
+                redirectToHome();
+            }
+    });
+
 }
