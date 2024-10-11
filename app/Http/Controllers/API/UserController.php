@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\APIServices\UserService;
-
+use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
 {
@@ -16,7 +16,9 @@ class UserController extends Controller
      */
     public function index(UserService $userService)
     {
-        $allusers = $userService->getAllUsers();
+        $result = [];
+        $result['users'] = $userService->getAllUsers();
+        return Response::json(['status' => 'success','result'=>$result]);
 
     }
 

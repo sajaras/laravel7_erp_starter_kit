@@ -37,6 +37,10 @@
 </head>
 
 <body class=" layout-boxed">
+
+<div class="d-none" id="jstemplates">
+    @yield('mustache_templates')
+</div>
     <!-- BEGIN LOADER -->
     <div id="load_screen">
         <div class="loader">
