@@ -15,4 +15,8 @@ class AppController extends Controller
     {
         return view('profile');
     }
+    public function users()
+    {
+        return view('users');
+    }
 }
