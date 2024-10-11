@@ -20,3 +20,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'AppController@index')->name('home');
+Route::get('/profile', 'AppController@profile')->name('profile');
