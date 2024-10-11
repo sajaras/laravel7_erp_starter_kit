@@ -2,6 +2,8 @@ var $UsersTable = $("#UsersTable");
 var $usersTableCluster;
 $(document).ready(function () {
 
+    loadUsersTable($("#element"));
+
     function loadUsersTable($clickedButton) {
         getUsers(function (users) {
 
@@ -19,7 +21,9 @@ $(document).ready(function () {
                 contentId: 'UsersTableBody',
                 verify_change: true
             });
-        }
+        });  
+
+    }
    
         
 
@@ -56,6 +60,5 @@ $(document).ready(function () {
 
     
 
-});
 
 
