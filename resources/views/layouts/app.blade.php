@@ -33,6 +33,11 @@
             text-decoration: none !important;
 
         }
+
+        .table {
+  
+    border-collapse: collapse;
+        }
     </style>
 </head>
 
