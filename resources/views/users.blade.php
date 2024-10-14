@@ -43,8 +43,16 @@
                                     <!-- <input class="form-control-sm" type="search" placeholder="search here" id="search"> -->
                                     <input type="text" class="w-100 form-control product-search br-30" id="input-search" placeholder="Search Here...">
                                 </div>
-                                <div class="col-md-4"></div>
-
+                                <div class="col-md-4">
+                                <div class="btn-group  mb-2 me-4" role="group">
+                                                <button id="btndefault6" type="button" class="btn btn-sm btn-dark dropdown-toggle _effect--ripple waves-effect waves-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Option <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                                                <div class="dropdown-menu" aria-labelledby="btndefault6" style="">
+                                                    <a href="#" class="dropdown-item" onclick="onAddUserClicked(this);"><i class="flaticon-gear-fill mr-1"></i>Add New User</a>
+                                                    <a href="#" class="dropdown-item" onclick="loadUsersTable(this);"><i class="flaticon-bell-fill-2 mr-1"></i>View Users</a>
+                                                </div>
+                                            </div>
+                                </div>
+                                    
                             </div>
                         </div>
                     </div>
