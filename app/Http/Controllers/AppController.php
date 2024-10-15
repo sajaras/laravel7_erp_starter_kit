@@ -19,4 +19,8 @@ class AppController extends Controller
     {
         return view('users');
     }
+    public function roles()
+    {
+        return view('roles');
+    }
 }
