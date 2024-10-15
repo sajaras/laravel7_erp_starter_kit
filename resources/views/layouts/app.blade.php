@@ -17,7 +17,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 
-    @include('layouts.rapidev_erp_jquery_v1_css')
+    @include('layouts.rapidev_erp_jquery_v1_css')/
+    <link rel="stylesheet" href="{{URL::asset('theme_customise.css')}}">
+
 
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     <style media="screen">
@@ -42,6 +44,8 @@
 </head>
 
 <body class=" layout-boxed">
+
+ @yield('pagemodals')
 
 <div class="d-none" id="jstemplates">
     @yield('mustache_templates')

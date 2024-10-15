@@ -1,3 +1,17 @@
+// function getUsers(callback) {
+
+//    return  ajax_request_formless({ url: '/api/users', headers: getapiRequestheaders(), method: 'get', data: {} }, function (response) {
+//         console.log("res",response);
+
+//         if(response.status == 'success')
+//         {
+//             callback(response.result.users); 
+
+//         }
+
+//     });
+
+// } 
 
 class UserService {
     constructor() {
@@ -11,7 +25,7 @@ class UserService {
             console.log("res", response);
             userob.users = response.result.users;
             if (response.status == 'success') {
-              
+
                 callback(response.result.users);
 
             }
@@ -19,16 +33,34 @@ class UserService {
         });
     }
 
-    getUsers()
-    {
+    getUsers() {
         return this.users;
     }
-    getEditUser()
-    {
+    getEditUser() {
         return his.edituser;
     }
-    getDeleteUser()
-    {
-        return this.deleteuser ;
+    getDeleteUser() {
+        return this.deleteuser;
     }
+
+    enableAddService(params) {
+        if ($(params.modalid).length > 0) {
+
+
+            $("UserService").adddata2({
+                showaddmodalbutton: params.showaddmodalbutton,
+                tableid: params.showaddmodalbutton,
+                url: params.url,
+                modalid: params.modalid,
+                formid: params.formid
+            });
+        }
+        else
+        {
+            alert("Users modal code is missing");
+        }
+
+    }
+
+
 }

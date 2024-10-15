@@ -2,6 +2,16 @@ var $UsersTable = $("#UsersTable");
 var $usersTableCluster;
 const userService = new UserService();
 
+userService.enableAddService({
+    showaddmodalbutton:"#addUserButton",
+    tableid:"#UsersTable",
+    url:"/users",
+    modalid:"#addUserModal",
+    formid:"#addUserForm",
+});
+
+
+
 function loadUsersTable($clickedButton) {
 
         
@@ -37,6 +47,7 @@ $(document).ready(function () {
     
 
     $(document).on('dblclick','.thisrow',function(){
+
 
             
     });

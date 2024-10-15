@@ -1,0 +1,50 @@
+.modal.erpModal
+{
+    border-radius: 0px !important;
+    --bs-modal-border-radius:0px;
+}
+.erpModal .modal-dialog
+{
+    border: 2px dotted var(--bs-indigo);
+   
+}
+
+
+.modal.erpModal .btn
+{
+    border-radius: 0px !important;
+}
+
+.bg-purple{
+    background-color:var(--bs-purple);
+}
+.bg-pink{
+    background-color:var(--bs-pink);
+}
+.bg-red{
+    background-color:var(--bs-red);
+}
+.bg-orange{
+    background-color:#975015;
+}
+.bg-yellow{
+    background-color:var(--bs-yellow);
+}
+.bg-green{
+    background-color:var(--bs-green);
+}
+.bg-teal{
+    background-color:var(--bs-teal);
+}
+.bg-cyan{
+    background-color:var(--bs-cyan);
+}
+.bg-black{
+    background-color:var(--bs-black);
+}
+.bg-white{
+    background-color:var(--bs-white);
+}
+.bg-gray{
+    background-color:var(--bs-gray);
+}

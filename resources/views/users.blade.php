@@ -1,5 +1,36 @@
 @extends('layouts.app')
 
+@section('pagemodals')
+
+    @component('bladecomponents.modal')
+
+    @slot('modalid')
+    addUserModal
+    @endslot
+    @slot('modalclass')
+    erpModal
+    @endslot
+    @slot('modaldialogclass')
+    erpModal
+    @endslot
+    @slot('modaltitle')
+    addUserModal
+    @endslot
+    @slot('modalbody')
+    addUserModal
+    @endslot
+    @slot('modalfooter')
+    
+    <button id="saveAndNextButton" class="erpButton btn bg-green text-white" >Save &amp; Next</button>
+    <button id="saveAndExitButton" type="button" class="erpButton btn bg-orange text-white">Save &amp; Exit</button>
+    <button id="clearButton" type="button" class="erpButton btn bg-black text-white">Clear</button>
+    <button id="closeButton" class="btn bg-red text-white" data-bs-dismiss="modal">Close</button>
+    @endslot
+
+    @endcomponent
+
+
+@endsection
 
 @section('mustache_templates')
 <template id="userRowTemplate">
@@ -47,7 +78,7 @@
                                 <div class="btn-group  mb-2 me-4" role="group">
                                                 <button id="btndefault6" type="button" class="btn btn-sm btn-dark dropdown-toggle _effect--ripple waves-effect waves-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Option <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
                                                 <div class="dropdown-menu" aria-labelledby="btndefault6" style="">
-                                                    <a href="#" class="dropdown-item" onclick="onAddUserClicked(this);"><i class="flaticon-gear-fill mr-1"></i>Add New User</a>
+                                                    <a href="#" class="dropdown-item" id="addUserButton"><i class="flaticon-gear-fill mr-1"></i>Add New User</a>
                                                     <a href="#" class="dropdown-item" onclick="loadUsersTable(this);"><i class="flaticon-bell-fill-2 mr-1"></i>View Users</a>
                                                 </div>
                                             </div>
