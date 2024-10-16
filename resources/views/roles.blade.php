@@ -14,6 +14,7 @@ erpModal
 erpModal
 @endslot
 @slot('modaltitle')
+@component('svg_icons.createform1') @slot('width') 40 @endslot @slot('height') 40 @endslot @endcomponent
 Create New Role
 @endslot
 @slot('modalbody')
@@ -21,61 +22,38 @@ Create New Role
 <form id="addRoleForm" class="form-horizontal" autocomplete="ignore">
     {{csrf_field()}}
 
+    @component('bladecomponents.form-tabs')
+    @slot('tab1')
+    @component('svg_icons.main') @slot('width') 15 @endslot @slot('height') 15 @endslot @endcomponent
+    &nbsp; Main
+    @endslot
 
-    <div class="simple-pill">
-
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pills-home-icon-tab" data-bs-toggle="pill" data-bs-target="#pills-home-icon" type="button" role="tab" aria-controls="pills-home-icon" aria-selected="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                    </svg>
-                    Main
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-profile-icon-tab" data-bs-toggle="pill" data-bs-target="#pills-profile-icon" type="button" role="tab" aria-controls="pills-profile-icon" aria-selected="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                    Permissions
-                </button>
-            </li>
-
-        </ul>
-        <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-home-icon" role="tabpanel" aria-labelledby="pills-home-icon-tab" tabindex="0">
-
-               
-                <div class="form-group row">
-                    <label for="company-name" class="text-end col-sm-3 col-form-label col-form-label-sm">Name</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control form-control-sm" id="role-name" placeholder="Role Name">
-                    </div>
-                </div>
-
-            </div>
-            <div class="tab-pane fade" id="pills-profile-icon" role="tabpanel" aria-labelledby="pills-profile-icon-tab" tabindex="0">
-                <p class="mt-3">Aliquam at sem nunc. Maecenas tincidunt lacus justo, non ultrices mauris egestas eu. Vestibulum ut ipsum ac eros rutrum blandit in eget quam. Nullam et lobortis nunc. Nam sodales, ante sed sodales rhoncus, diam ipsum faucibus mauris, non interdum nisl lacus vel justo.</p>
-                <p>Sed imperdiet mi tincidunt mauris convallis, ut ullamcorper nunc interdum. Praesent maximus massa eu varius gravida. Nullam in malesuada enim. Morbi commodo pellentesque velit sodales pretium. Mauris scelerisque augue vel est pulvinar laoreet.</p>
-            </div>
-
-        </div>
-
+    @slot('tab1content')
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text">
+            @component('svg_icons.role') @slot('width') 24 @endslot @slot('height') 24 @endslot @endcomponent
+            &nbsp;
+            Name</span>
+        <input type="text" class="form-control" placeholder="Role Name" aria-label="notification">
     </div>
+    @endslot
 
+    @slot('tab2')
+    @component('svg_icons.permissions') @slot('width')15 @endslot @slot('height') 15 @endslot @endcomponent
+    &nbsp; Permissions
+    @endslot
+
+    @slot('tab2content')
+    second tab
+    @endslot
+
+    @endcomponent
 </form>
 
 @endslot
 @slot('modalfooter')
 
-<button id="saveAndNextButton" class="erpButton btn bg-green text-white">Save &amp; Next</button>
-<button id="saveAndExitButton" type="button" class="erpButton btn bg-orange text-white">Save &amp; Exit</button>
-<button id="clearButton" type="button" class="erpButton btn bg-black text-white">Clear</button>
-<button id="closeButton" class="btn bg-red text-white" data-bs-dismiss="modal">Close</button>
-@endslot
+    @component('bladecomponents.crud_addbuttons') @endcomponent
 
 @endcomponent
 

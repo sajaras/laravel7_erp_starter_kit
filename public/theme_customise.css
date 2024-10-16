@@ -5,7 +5,7 @@
 }
 .erpModal .modal-dialog
 {
-    border: 2px dotted var(--bs-indigo);
+    border: 2px solid #959391;
    
 }
 
@@ -47,4 +47,25 @@
 }
 .bg-gray{
     background-color:var(--bs-gray);
+}
+.erpModal .modal-header
+{
+    background: #f3f3f3;
+}
+
+
+.erpModal .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: black;
+    background-color: #e9bcbc;
+    font-weight: bold;
+}
+
+.erpModal .nav-pills .nav-link {
+    border-radius: 0px !important;
+    border: 1px dashed black;
+}
+
+.form-control:focus {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 0.25rem rgb(0 0 0 / 25%);
 }
