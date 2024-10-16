@@ -35,9 +35,10 @@ class RoleController extends Controller
         $validator = Validator::make($request->all(),[]);
         if ($validator->passes()) {
 
-            $result = DB::transaction(function () use ($request,$roleService){
+             return DB::transaction(function () use ($request,$roleService){
                 $result = [];
-                $result['role'] = $roleService->createRole($request->name);
+                $result['result'] = [];
+                $result['result']['role'] = $roleService->createRole($request->name);
                 $result['status'] = 'success';
                 return Response::json($result);
             });

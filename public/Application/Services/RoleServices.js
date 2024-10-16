@@ -33,13 +33,13 @@ class RoleService {
         if ($(params.modalid).length > 0) {
 
 
-            $("RoleService").adddata2({
-                showaddmodalbutton: params.showaddmodalbutton,
-                tableid: params.showaddmodalbutton,
-                url: params.url,
-                modalid: params.modalid,
-                formid: params.formid
-            });
+            // $("RoleService").adddata2({
+            //     showaddmodalbutton: params.showaddmodalbutton,
+            //     tableid: params.showaddmodalbutton,
+            //     url: params.url,
+            //     modalid: params.modalid,
+            //     formid: params.formid
+            // });
         }
         else
         {
@@ -64,7 +64,11 @@ class RoleService {
 
     saveRoleAddForm()
     {
-        this.createRole(this.fetchRoles(this.loadRolesTable));
+        this.createRole(function(role,roleObj){
+            roleObj.fetchRoles(function(roles,roleObj){
+                roleObj.loadRolesTable(roles,roleObj);
+            });
+        });
     }
 
     createRole(callback)
