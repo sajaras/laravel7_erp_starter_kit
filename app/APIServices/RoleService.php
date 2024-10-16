@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Permission;
 class RoleService
 {
 
+    protected $role;
     public function __construct() {}
 
     public function getAllRoles()
@@ -16,4 +17,20 @@ class RoleService
 
         return Role::all();
     }
+
+   public function createRole($roleName)
+   {
+    $this->role = Role::create(['name' => $roleName]);
+    return $this->role;
+   }
+
+   public function assignPermissions($permissionIds)
+   {
+        $this->role->syncPermissions($permissionIds);
+        return $this->role;
+   }
+
+
+
+
 }

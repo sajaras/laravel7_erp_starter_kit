@@ -34,7 +34,7 @@ Create New Role
             @component('svg_icons.role') @slot('width') 24 @endslot @slot('height') 24 @endslot @endcomponent
             &nbsp;
             Name</span>
-        <input type="text" class="form-control" placeholder="Role Name" aria-label="notification">
+        <input type="text" class="form-control" placeholder="Role Name" name="name" aria-label="notification">
     </div>
     @endslot
 
@@ -109,7 +109,7 @@ Create New Role
                                             </svg></button>
                                         <div class="dropdown-menu" aria-labelledby="btndefault6" style="">
                                             <a href="#" class="dropdown-item" id="addRoleButton"><i class="flaticon-gear-fill mr-1"></i>Add New Role</a>
-                                            <a href="#" class="dropdown-item" onclick="loadRolesTable(this);"><i class="flaticon-bell-fill-2 mr-1"></i>View Roles</a>
+                                            <a href="#" class="dropdown-item" id="viewRoleButton"><i class="flaticon-bell-fill-2 mr-1"></i>View Roles</a>
                                         </div>
                                     </div>
                                 </div>

@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\APIServices\RoleService;
 use Illuminate\Support\Facades\Response;
-
+use Illuminate\Support\Facades\Validator;
+use DB;
 class RoleController extends Controller
 {
     /**
@@ -28,9 +29,24 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,RoleService $roleService)
     {
-        //
+        
+        $validator = Validator::make($request->all(),[]);
+        if ($validator->passes()) {
+
+            $result = DB::transaction(function () use ($request,$roleService){
+                $result = [];
+                $result['role'] = $roleService->createRole($request->name);
+                $result['status'] = 'success';
+                return Response::json($result);
+            });
+            
+        }
+        else
+        {
+            return Response::json(['status'=> 'error','message'=> $validator->errors()]);
+        }
     }
 
     /**
@@ -41,7 +57,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        return Response::json(['status'=> 'success','result'=>Role::find($id)]);
     }
 
     /**

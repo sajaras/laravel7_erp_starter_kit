@@ -77,7 +77,7 @@ function ajax_request_formless(ajaxparameters, callback) {
 
 function ajax_request_form(ajaxparameters, callback) {
 
-    var ajaxdefaults = { errorhandle: "automatic", url: "", formid: "", type: "post", method: "post", contenttype: false, processdata: false, appenddata: [], databaseerrorfield: "#databaseerror", database_error_modal: "#database_error_modal", dberrorreturnfield: "database_error", dberrormsgheading: "Constraint Violation", dberror_icon: 'error' };
+    var ajaxdefaults = {headers:{},errorhandle: "automatic", url: "", formid: "", type: "post", method: "post", contenttype: false, processdata: false, appenddata: [], databaseerrorfield: "#databaseerror", database_error_modal: "#database_error_modal", dberrorreturnfield: "database_error", dberrormsgheading: "Constraint Violation", dberror_icon: 'error' };
     ajaxoptions = $.extend(ajaxdefaults, ajaxparameters);  // if a perticular option field  in  corresponding js is given then its default option will not be  considered
 
     var formelement = $(ajaxoptions.formid);
@@ -96,6 +96,7 @@ function ajax_request_form(ajaxparameters, callback) {
 
     $.ajax({
         url: ajaxoptions.url,
+        headers:  ajaxoptions.headers,
         type: ajaxoptions.type,
         data: formData,
         contentType: ajaxoptions.contenttype, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
