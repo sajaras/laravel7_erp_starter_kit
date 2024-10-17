@@ -7,7 +7,12 @@ var roleServiceParams = {
     AddForm:'#addRoleForm',
     displayTableScrollId: 'RolesTableDiv',
     displayTableContentId: 'RolesTableBody',
-    displayTableRowTemplate:'#roleRowTemplate'
+    displayTableRowTemplate:'#roleRowTemplate',
+
+     editFormModal:'#editRoleModal',
+     editForm:'#editRoleForm',
+    editButtonClass:'.editButton'
+    
 };
 const roleService = new RoleService(roleServiceParams);
 
@@ -31,7 +36,12 @@ $(document).ready(function () {
 
     $(document).on('click',roleServiceParams.AddFormModal + ' .saveButton',function(){
 
-        roleService.saveRoleAddForm();
+        roleService.saveRoleAddForm($(this));
+
+    });
+    $(document).on('click',roleServiceParams.editButtonClass ,function(){
+
+        roleService.showEditForm($(this).closest('tr'));
 
     });
 

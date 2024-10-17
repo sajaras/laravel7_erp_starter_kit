@@ -1,7 +1,7 @@
 <button type="button" id="saveAndNextButton" class="saveButton erpButton btn bg-green text-white">
     @component('svg_icons.create2') @slot('width') 24 @endslot @slot('height') 24 @endslot @slot('fill') #fff @endslot @endcomponent
     Save &amp; Next</button>
-<button type="button" id="saveAndExitButton" type="button" class="saveButton erpButton btn bg-orange text-white">
+<button type="button" id="saveAndExitButton" type="button" class="saveButton erpButton btn bg-orange text-white exitmodal">
     @component('svg_icons.create1') @slot('width') 24 @endslot @slot('height') 24 @endslot @slot('fill') #fff @endslot @endcomponent
     Save &amp; Exit</button>
 <button type="button" id="clearButton" type="button" class="erpButton btn bg-black text-white">

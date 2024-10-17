@@ -18,19 +18,20 @@ class RoleService
         return Role::all();
     }
 
-   public function createRole($roleName)
-   {
-    $this->role = Role::create(['name' => $roleName]);
-    return $this->role;
-   }
+    public function createRole($roleName)
+    {
+        $this->role = Role::create(['name' => $roleName]);
+        return $this->role;
+    }
 
-   public function assignPermissions($permissionIds)
-   {
+    public function assignPermissions($permissionIds)
+    {
         $this->role->syncPermissions($permissionIds);
         return $this->role;
-   }
+    }
 
-
-
-
+    public function getRole($roleId)
+    {
+        return Role::find($roleId);
+    }
 }

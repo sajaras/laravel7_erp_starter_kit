@@ -56,9 +56,13 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,RoleService $roleService)
     {
-        return Response::json(['status'=> 'success','result'=>Role::find($id)]);
+        $response = [];
+        $response['status'] = 'success';
+        $response['result'] = [];
+        $response['result']['role'] = $roleService->getRole($id);
+        return Response::json($response);
     }
 
     /**

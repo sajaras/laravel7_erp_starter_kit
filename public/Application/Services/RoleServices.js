@@ -1,8 +1,8 @@
 class RoleService {
     constructor(params) {
         this.roles = [];
-        this.editrole = null;
-        this.deleterole = null;
+        this.editRole = null;
+        this.deleteRole = null;
         this.params = params;
     }
     fetchRoles(callback) {
@@ -55,6 +55,13 @@ class RoleService {
         $(this.params.AddFormModal).modal('show');
 
     }
+    closeRoleAddForm()
+    {
+       
+        this.clearAddForm();
+        $(this.params.AddFormModal).modal('hide');
+
+    }
 
     clearAddForm(){
         
@@ -62,11 +69,17 @@ class RoleService {
 
     }
 
-    saveRoleAddForm()
+    saveRoleAddForm($clickedButton)
     {
         this.createRole(function(role,roleObj){
             roleObj.fetchRoles(function(roles,roleObj){
                 roleObj.loadRolesTable(roles,roleObj);
+                roleObj.clearAddForm();
+                if($clickedButton.hasClass('exitmodal'))
+                {
+                    roleObj.closeRoleAddForm();
+                }
+                
             });
         });
     }
@@ -112,6 +125,34 @@ class RoleService {
                 $(roleObj.params.displayTable).find('tbody').html("<tr><td colspan='4' class='text-center'>No Records Found</td></tr>");
             }
            
+        }
+
+
+        showEditForm($row)
+        {
+            this.getRole($row.find('.editid').val(),this.displayEditForm);
+        }
+
+        displayEditForm(roleObj)
+        {
+            
+            var $EditModal = $(roleObj.params.editFormModal);
+            $EditModal.find('#editRoleName').val(roleObj.editRole.name);
+            $EditModal.modal('show');
+        }
+        getRole($id,callback)
+        {
+            var roleObj = this;
+            return ajax_request_formless({ url: '/api/roles/'+$id, headers: getapiRequestheaders(), method: 'get', data: {} }, function (response) {
+                console.log("editresponse", response);
+                roleObj.editRole = response.result.role;
+                if (response.status == 'success') {
+    
+                    callback(roleObj);
+    
+                }
+    
+            });
         }
     
 
