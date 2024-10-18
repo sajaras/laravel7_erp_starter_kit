@@ -11,7 +11,7 @@
     <title> @yield('title') </title>
     <link rel="icon" type="image/x-icon" href="{{URL::asset($assetpath .'favicon.ico')}}" />
 
-
+    
     @include('layouts.theme_css');
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +19,7 @@
 
     @include('layouts.rapidev_erp_jquery_v1_css')/
     <link rel="stylesheet" href="{{URL::asset('theme_customise.css')}}">
+    
 
 
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
