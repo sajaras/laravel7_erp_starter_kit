@@ -11,7 +11,8 @@ var roleServiceParams = {
 
      editFormModal:'#editRoleModal',
      editForm:'#editRoleForm',
-    editButtonClass:'.editButton'
+    editButtonClass:'.editButton',
+    pageLoaderId:"#pageLoader"
     
 };
 const roleService = new RoleService(roleServiceParams);
@@ -25,7 +26,7 @@ $(document).ready(function () {
     $("#RolesTable").tableHeadFixer();
 
     $(document).on('click','#viewRoleButton',function(){
-
+        
         roleService.fetchRoles(roleService.loadRolesTable);
     });
     

@@ -13,6 +13,9 @@ erpModal
 @slot('modaldialogclass')
 erpModal
 @endslot
+@slot('enableLoader')
+1
+@endslot
 @slot('modaltitle')
 @component('svg_icons.createform1') @slot('width') 40 @endslot @slot('height') 40 @endslot @endcomponent
 Create New Role
@@ -65,6 +68,9 @@ Create New Role
 
 @slot('modalid')
 editRoleModal
+@endslot
+@slot('enableLoader')
+1
 @endslot
 @slot('modalclass')
 erpModal
@@ -157,7 +163,9 @@ erpModal
                         <div class="row">
                             <div class="mt-5 col-xl-12 col-md-12 col-sm-12 col-12 row">
                                 <div class="col-md-4">
-                                    <h4>Roles</h4>
+                                    <h4>Roles
+                                    <span id="pageLoader" class="erploader d-none"></span>
+                                    </h4>
                                 </div>
                                 <div class="col-md-4">
                                     <!-- <input class="form-control-sm" type="search" placeholder="search here" id="search"> -->

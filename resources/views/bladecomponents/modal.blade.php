@@ -13,6 +13,10 @@
                 </button>
             </div>
             <div class="modal-body">
+                @if(isset($enableLoader))
+                <span class="erploader d-none"></span>
+                @endif
+
                 {{$modalbody}}
             </div>
             <div class="modal-footer">

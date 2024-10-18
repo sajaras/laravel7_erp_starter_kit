@@ -6,12 +6,13 @@ class RoleService {
         this.params = params;
     }
     fetchRoles(callback) {
+        this.startPageLoader();
         var roleObj = this;
         return ajax_request_formless({ url: '/api/roles', headers: getapiRequestheaders(), method: 'get', data: {} }, function (response) {
             console.log("res", response);
             roleObj.roles = response.result.roles;
             if (response.status == 'success') {
-
+                roleObj.endPageLoader();
                 callback(response.result.roles,roleObj);
 
             }
@@ -76,7 +77,9 @@ class RoleService {
 
     saveRoleAddForm($clickedButton)
     {
+        this.startLoader($(this.params.AddFormModal));
         this.createRole(function(role,roleObj){
+            roleObj.endLoader($(roleObj.params.AddFormModal));
             roleObj.fetchRoles(function(roles,roleObj){
                 roleObj.loadRolesTable(roles,roleObj);
                 roleObj.clearAddForm();
@@ -170,11 +173,14 @@ class RoleService {
                     
             //     });
             // });
+            this.startLoader($(this.params.editFormModal));
             this.UpdateRole(function(role,roleObj){
+                roleObj.endLoader($(roleObj.params.editFormModal));
                 roleObj.fetchRoles(function(roles,roleObj){
                 roleObj.loadRolesTable(roles,roleObj);
                 roleObj.closeRoleEditForm();
                 roleObj.clearEditForm();
+               
             })},$(this.params.editFormModal).find('#editingId').val());
             
         }
@@ -190,6 +196,7 @@ class RoleService {
         UpdateRole(callback,$id)
         {
             var roleObj = this;
+           
             return ajax_request_form({ url: '/api/roles/'+$id,formid:roleObj.params.editForm, headers: getapiRequestheaders(), method: 'put'}, function (response) {
                 
                 console.log("updateResponse",response);
@@ -202,6 +209,26 @@ class RoleService {
     
             });
         }
+
+        startLoader($modal)
+        {
+            $modal.find('.erploader').removeClass('d-none');
+        }
+        endLoader($modal)
+        {
+            $modal.find('.erploader').addClass('d-none');
+        }
+        
+        startPageLoader()
+        {
+            $(this.params.pageLoaderId).removeClass('d-none');
+        }
+        endPageLoader()
+        {
+            $(this.params.pageLoaderId).addClass('d-none');
+        }
+
+        
 
 
 }
