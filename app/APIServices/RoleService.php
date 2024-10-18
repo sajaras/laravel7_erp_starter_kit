@@ -34,4 +34,13 @@ class RoleService
     {
         return Role::find($roleId);
     }
+
+    public function updateRole($roleId,$name)
+    {
+       
+        $role  = Role::find($roleId);
+        $role->name = $name;
+        $role->save();
+        return $role;
+    }
 }

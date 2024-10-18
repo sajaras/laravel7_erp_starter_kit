@@ -75,3 +75,8 @@
     background-color: #4361ee !important;
     color:white !important;
 }
+
+.clusteriseScrollHeight
+{
+    max-height: 50vh;
+}

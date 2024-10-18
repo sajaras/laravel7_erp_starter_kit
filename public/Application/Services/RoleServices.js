@@ -68,6 +68,11 @@ class RoleService {
        $(this.params.AddForm)[0].reset();
 
     }
+    clearEditForm(){
+        
+       $(this.params.editForm)[0].reset();
+
+    }
 
     saveRoleAddForm($clickedButton)
     {
@@ -137,6 +142,7 @@ class RoleService {
         {
             
             var $EditModal = $(roleObj.params.editFormModal);
+            $EditModal.find('#editingId').val(roleObj.editRole.id);
             $EditModal.find('#editRoleName').val(roleObj.editRole.name);
             $EditModal.modal('show');
         }
@@ -154,8 +160,48 @@ class RoleService {
     
             });
         }
-    
 
+        saveRoleEditForm($clickedButton)
+        {
+            // this.updateRole(function(role,roleObj){
+            //     roleObj.fetchRoles(function(roles,roleObj){
+            //         roleObj.loadRolesTable(roles,roleObj);
+            //         this.closeRoleEditForm();
+                    
+            //     });
+            // });
+            this.UpdateRole(function(role,roleObj){
+                roleObj.fetchRoles(function(roles,roleObj){
+                roleObj.loadRolesTable(roles,roleObj);
+                roleObj.closeRoleEditForm();
+                roleObj.clearEditForm();
+            })},$(this.params.editFormModal).find('#editingId').val());
+            
+        }
+
+        closeRoleEditForm()
+        {
+           
+            
+            $(this.params.editFormModal).modal('hide');
+    
+        }
+    
+        UpdateRole(callback,$id)
+        {
+            var roleObj = this;
+            return ajax_request_form({ url: '/api/roles/'+$id,formid:roleObj.params.editForm, headers: getapiRequestheaders(), method: 'put'}, function (response) {
+                
+                console.log("updateResponse",response);
+                
+                if (response.status == 'success') {
+    
+                    callback(response.result.role,roleObj);
+    
+                }
+    
+            });
+        }
 
 
 }

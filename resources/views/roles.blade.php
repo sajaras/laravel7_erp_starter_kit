@@ -80,7 +80,7 @@ erpModal
 
 <form id="editRoleForm" class="form-horizontal" autocomplete="ignore">
     {{csrf_field()}}
-
+    <input type="hidden" id="editingId">
     @component('bladecomponents.form-tabs')
     @slot('represents')
     edit
@@ -151,7 +151,7 @@ erpModal
 
         <div class="row layout-top-spacing">
 
-            <div id="RolesTableDiv" class="col-lg-12 col-12 layout-spacing">
+            <div  class="col-lg-12 col-12 layout-spacing">
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
                         <div class="row">
@@ -187,7 +187,7 @@ erpModal
                     </div>
                     <div class="widget-content widget-content-area">
 
-                        <div class="table-responsive">
+                        <div class="table-responsive clusteriseScrollHeight" id="RolesTableDiv">
                             <table id="RolesTable" class="table table-bordered">
                                 <thead>
                                     <tr>

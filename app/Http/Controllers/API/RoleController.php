@@ -72,9 +72,24 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id,RoleService $roleService)
     {
-        //
+        $validator = Validator::make($request->all(),[]);
+        if ($validator->passes()) {
+
+             return DB::transaction(function () use ($request,$roleService,$id){
+                $result = [];
+                $result['result'] = [];
+                $result['result']['role'] = $roleService->updateRole($id,$request->name);
+                $result['status'] = 'success';
+                return Response::json($result);
+            });
+            
+        }
+        else
+        {
+            return Response::json(['status'=> 'error','message'=> $validator->errors()]);
+        }
     }
 
     /**

@@ -10,3 +10,4 @@
 <script src="{{URL::asset('/rapidev_erp_jquery_v1/erpcustom_autocomplete.js')}}"></script>
 <script src="{{URL::asset('/rapidev_erp_jquery_v1/erpplus_jquery_library.js')}}"></script>
 <script src="{{URL::asset('/rapidev_erp_jquery_v1/mustache.js')}}"></script>
+<script src="{{URL::asset('/rapidev_erp_jquery_v1/fixedtableheader/tableHeadFixer.js')}}"></script>

@@ -22,7 +22,7 @@ const roleService = new RoleService(roleServiceParams);
 $(document).ready(function () {
 
    
-
+    $("#RolesTable").tableHeadFixer();
 
     $(document).on('click','#viewRoleButton',function(){
 
@@ -42,6 +42,13 @@ $(document).ready(function () {
     $(document).on('click',roleServiceParams.editButtonClass ,function(){
 
         roleService.showEditForm($(this).closest('tr'));
+
+    });
+
+    $(document).on('click',roleServiceParams.editFormModal + ' .updateButton',function(){
+
+
+        roleService.saveRoleEditForm($(this));
 
     });
 
