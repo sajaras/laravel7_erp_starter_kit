@@ -74,7 +74,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id,RoleService $roleService)
+    public function update($id,Request $request,RoleService $roleService)
     {
         $validator = Validator::make($request->all(),[]);
         if ($validator->passes()) {
@@ -121,5 +121,15 @@ class RoleController extends Controller
         {
             return Response::json(['status'=> 'error','message'=> $validator->errors()]);
         }
+    }
+
+    public function getPermissions($roleId,RoleService $roleService)
+    {
+        $result = [];
+        $result['status'] = 'success';
+        $result['result'] = [];
+        $result['result']['permissions'] = $roleService->getPermissions($roleId);
+        return $result;
+
     }
 }

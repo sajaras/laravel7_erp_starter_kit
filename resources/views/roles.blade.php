@@ -193,7 +193,7 @@ erpModal
         <p class=" autoCompleteDisplayBox"> <span class="ms-1 permissionDisplay"> @{{permissionDisplay}} </span></p>
     </td>
         <td class="text-center">
-           <input type="checkbox" class="rowCheckbox">
+           <input type="checkbox" class="rowCheckbox form-check-input">
         </td>
 
 

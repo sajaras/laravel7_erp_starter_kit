@@ -24,5 +24,6 @@ Route::group(['middleware' => ['auth:api']], function () {
 
     Route::apiResource('users', 'API\UserController');
     Route::apiResource('roles', 'API\RoleController');
+    Route::get('/roles/{id}/permissions','API\RoleController@getPermissions')->name('roles.permissions');
     Route::apiResource('permissions', 'API\PermissionController');
 });   

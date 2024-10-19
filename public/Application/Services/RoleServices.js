@@ -19,7 +19,7 @@ class RoleService {
     }
 
     fetchRoles(callback, errorcallback) {
-        
+
         var roleObj = this;
         return ajax_request_formless({ url: '/api/roles', headers: getapiRequestheaders(), method: 'get', data: {} }, function (response) {
             console.log("res", response);
@@ -81,11 +81,13 @@ class RoleService {
     clearAddForm() {
 
         $(this.params.AddForm)[0].reset();
+        $(this.params.addModalRolePermissionTable).find('tbody').html('');
 
     }
     clearEditForm() {
 
         $(this.params.editForm)[0].reset();
+        $(this.params.editModalRolePermissionTable).find('tbody').html('');
 
     }
 
@@ -103,7 +105,7 @@ class RoleService {
                     roleObj.closeRoleAddForm();
                 }
 
-            },roleObj.pageLoadErrorHandler);
+            }, roleObj.pageLoadErrorHandler);
         }, function (errorResponse, $roleObj) {
             $roleObj.displayError(errorResponse);
             $roleObj.endLoader($($roleObj.params.addFormModal));
@@ -164,15 +166,27 @@ class RoleService {
         this.highLightRole = null;
     }
     showEditForm($roleId) {
-        this.getRole($roleId, this.displayEditForm);
+        this.getRole($roleId, this.displayEditFormMainTab);
+        this.getRolePermissions($roleId, this.displayEditFormPermissionsTab);
     }
 
-    displayEditForm(roleObj) {
+    displayEditFormMainTab(roleObj) {
 
         var $EditModal = $(roleObj.params.editFormModal);
         $EditModal.find('#editingId').val(roleObj.editRole.id);
         $EditModal.find('#editRoleName').val(roleObj.editRole.name);
         $EditModal.modal('show');
+    }
+    displayEditFormPermissionsTab(rolePermissions, roleObj) {
+        var allrows = [];
+        for (var kroleperm in rolePermissions) {
+            rolePermissions[kroleperm].permissionValue = rolePermissions[kroleperm].id;
+            rolePermissions[kroleperm].permissionDisplay = rolePermissions[kroleperm].name;
+            allrows.push(roleObj.getRowForRolePermissionsTable(rolePermissions[kroleperm]));
+        }
+
+        $(roleObj.params.editModalRolePermissionTable).find('tbody').html(allrows.join(""));
+
     }
     getRole($id, callback) {
         var roleObj = this;
@@ -187,6 +201,21 @@ class RoleService {
 
         });
     }
+    getRolePermissions($id, callback) {
+        var roleObj = this;
+        return ajax_request_formless({ url: '/api/roles/' + $id + '/permissions', headers: getapiRequestheaders(), method: 'get', data: {} }, function (response) {
+            console.log("editrolepermissionsresponse", response);
+
+            if (response.status == 'success') {
+
+                callback(response.result.permissions, roleObj);
+
+            }
+
+        });
+    }
+
+
 
     saveRoleEditForm($clickedButton) {
         // this.updateRole(function(role,roleObj){
@@ -317,7 +346,7 @@ class RoleService {
             $roleObj.deleteRole($roleId, $displayName, function ($role, $roleObj, $displayName) {
                 $roleObj.deleteRoleSuccessMessage($displayName);
                 $roleObj.fetchRoles($roleObj.loadRolesTable, $roleObj.pageLoadErrorHandler);
-            },$roleObj.displayError);
+            }, $roleObj.displayError);
 
         });
 
@@ -347,7 +376,7 @@ class RoleService {
         });
     }
 
-    deleteRole($roleId, $displayName, callback,errorcallback) {
+    deleteRole($roleId, $displayName, callback, errorcallback) {
 
         var roleObj = this;
         return ajax_request_form({ url: '/api/roles/' + $roleId, formid: roleObj.params.deleteForm, headers: getapiRequestheaders(), method: 'delete' }, function (response) {
@@ -362,7 +391,7 @@ class RoleService {
             else if (response.status == 'error') {
                 errorcallback(response, roleObj);
             }
-            
+
 
         });
     }
@@ -400,14 +429,28 @@ class RoleService {
 
     }
 
-    pageLoadErrorHandler(errorResponse,$roleObj) {
+    pageLoadErrorHandler(errorResponse, $roleObj) {
         $roleObj.endPageLoader();
         $roleObj.displayError(errorResponse)
     }
 
-    getRowForRolePermissionsTable(data)
-    {
+    getRowForRolePermissionsTable(data) {
         var RolePermissionsTableRowTemplate = $("#rolePermissionsRowTemplate").html();
-        return Mustache.to_html(RolePermissionsTableRowTemplate,data);
+        return Mustache.to_html(RolePermissionsTableRowTemplate, data);
+    }
+
+    removeSelectedRolePermissionRows($table) {
+        $table.find('tbody tr').each(function () {
+
+            if ($(this).find('.rowCheckbox').prop("checked") == true) {
+
+                $(this).remove();
+            }
+        });
+    }
+    addRolePermissionRow($table, data) {
+
+        $table.append(this.getRowForRolePermissionsTable(data));
+
     }
 }

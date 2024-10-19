@@ -5,14 +5,18 @@ var roleServiceParams = {
     pageLoaderId: "#pageLoader",
     pageSearchBox: '#RoleTableSearch',
     displayTable: '#RolesTable',
+
     addFormModal: '#addRoleModal',
     AddForm: '#addRoleForm',
+    addModalRolePermissionTable:'#rolePermissionsTable',
+
     displayTableScrollId: 'RolesTableDiv',
     displayTableContentId: 'RolesTableBody',
     displayTableRowTemplate: '#roleRowTemplate',
 
     editFormModal: '#editRoleModal',
     editForm: '#editRoleForm',
+    editModalRolePermissionTable:'#rolePermissionsEditTable',
     editButtonClass: '.editButton',
 
     deleteForm: '#deleteRoleForm',
@@ -57,8 +61,14 @@ console.log(permissionService.getPermissions());
 
     $(document).on('click','.rolePermissionAddButton',function(){
 
-        $(this).closest('.modal').find('.rolePermissionsTable tbody').append(roleService.getRowForRolePermissionsTable({rid:'d'}));
+        roleService.addRolePermissionRow($(this).closest('table'),{});
     });
+
+    $(document).on('click','.rolePermissiondeleteButton',function(){
+
+        roleService.removeSelectedRolePermissionRows($(this).closest('table'));
+    });
+
     $(document).on('click', roleServiceParams.editButtonClass, function () {
 
         roleService.showEditForm($(this).closest('tr').find('.editid').val());
@@ -66,7 +76,6 @@ console.log(permissionService.getPermissions());
     });
 
     $(document).on('click', roleServiceParams.editFormModal + ' .updateButton', function () {
-
 
         roleService.saveRoleEditForm($(this));
 

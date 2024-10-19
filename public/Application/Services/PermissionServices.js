@@ -164,7 +164,7 @@ class PermissionService {
         this.highLightPermission = null;
     }
     showEditForm($permissionId) {
-        this.getPermission($permissionId, this.displayEditForm);
+        this.getPermission($permissionId, this.displayEditForm,this.displayError);
     }
 
     displayEditForm(permissionObj) {
@@ -174,15 +174,18 @@ class PermissionService {
         $EditModal.find('#editPermissionName').val(permissionObj.editPermission.name);
         $EditModal.modal('show');
     }
-    getPermission($id, callback) {
+    getPermission($id, callback,errorcallback) {
         var permissionObj = this;
         return ajax_request_formless({ url: '/api/permissions/' + $id, headers: getapiRequestheaders(), method: 'get', data: {} }, function (response) {
             console.log("editresponse", response);
-            permissionObj.editPermission = response.result.permission;
+            
             if (response.status == 'success') {
-
+                permissionObj.editPermission = response.result.permission;
                 callback(permissionObj);
 
+            }
+            else if (response.status == 'error') {
+                errorcallback(response, permissionObj);
             }
 
         });

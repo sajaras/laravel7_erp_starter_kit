@@ -49,4 +49,10 @@ class RoleService
     {
         return Role::find($roleId)->delete();
     }
+
+    public function getPermissions($roleId){
+
+        return Role::find($roleId)->getAllPermissions();
+
+    }
 }

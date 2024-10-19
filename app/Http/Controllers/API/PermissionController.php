@@ -8,8 +8,16 @@ use App\APIServices\PermissionService;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use DB;
+use App\Permission;
+
 class PermissionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Permission::class, 'permission');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +27,7 @@ class PermissionController extends Controller
     {
         $result = [];
         $result['permissions'] = $permissionService->getAllPermissions();
-        return Response::json(['status' => 'success','result'=>$result]);
-
+        return Response::json(['status' => 'success', 'result' => $result]);
     }
 
     /**
@@ -29,24 +36,21 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,PermissionService $permissionService)
+    public function store(Request $request, PermissionService $permissionService)
     {
-        
-        $validator = Validator::make($request->all(),[]);
+
+        $validator = Validator::make($request->all(), []);
         if ($validator->passes()) {
 
-             return DB::transaction(function () use ($request,$permissionService){
+            return DB::transaction(function () use ($request, $permissionService) {
                 $result = [];
                 $result['result'] = [];
                 $result['result']['permission'] = $permissionService->createPermission($request->name);
                 $result['status'] = 'success';
                 return Response::json($result);
             });
-            
-        }
-        else
-        {
-            return Response::json(['status'=> 'error','message'=> $validator->errors()]);
+        } else {
+            return Response::json(['status' => 'error', 'message' => $validator->errors()]);
         }
     }
 
@@ -56,7 +60,7 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id,PermissionService $permissionService)
+    public function show($id, PermissionService $permissionService)
     {
         $response = [];
         $response['status'] = 'success';
@@ -72,23 +76,20 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id,PermissionService $permissionService)
+    public function update(Request $request, $id, PermissionService $permissionService)
     {
-        $validator = Validator::make($request->all(),[]);
+        $validator = Validator::make($request->all(), []);
         if ($validator->passes()) {
 
-             return DB::transaction(function () use ($request,$permissionService,$id){
+            return DB::transaction(function () use ($request, $permissionService, $id) {
                 $result = [];
                 $result['result'] = [];
-                $result['result']['permission'] = $permissionService->updatePermission($id,$request->name);
+                $result['result']['permission'] = $permissionService->updatePermission($id, $request->name);
                 $result['status'] = 'success';
                 return Response::json($result);
             });
-            
-        }
-        else
-        {
-            return Response::json(['status'=> 'error','message'=> $validator->errors()]);
+        } else {
+            return Response::json(['status' => 'error', 'message' => $validator->errors()]);
         }
     }
 
@@ -98,23 +99,20 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,Request $request,PermissionService $permissionService)
+    public function destroy($id, Request $request, PermissionService $permissionService)
     {
-        $validator = Validator::make($request->all(),[]);
+        $validator = Validator::make($request->all(), []);
         if ($validator->passes()) {
 
-             return DB::transaction(function () use ($request,$permissionService,$id){
+            return DB::transaction(function () use ($request, $permissionService, $id) {
                 $result = [];
                 $result['result'] = [];
                 $result['result']['permission'] = $permissionService->deletePermission($id);
                 $result['status'] = 'success';
                 return Response::json($result);
             });
-            
-        }
-        else
-        {
-            return Response::json(['status'=> 'error','message'=> $validator->errors()]);
+        } else {
+            return Response::json(['status' => 'error', 'message' => $validator->errors()]);
         }
     }
 }
