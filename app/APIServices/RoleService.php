@@ -43,4 +43,8 @@ class RoleService
         $role->save();
         return $role;
     }
+    public function deleteRole($roleId)
+    {
+        return Role::find($roleId)->delete();
+    }
 }

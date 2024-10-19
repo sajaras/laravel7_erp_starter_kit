@@ -5,7 +5,7 @@
 @component('bladecomponents.modal')
 
 @slot('modalid')
-addRoleModal
+addPermissionModal
 @endslot
 @slot('modalclass')
 erpModal
@@ -18,13 +18,13 @@ erpModal
 @endslot
 @slot('modaltitle')
 @component('svg_icons.createform1') @slot('width') 40 @endslot @slot('height') 40 @endslot @endcomponent
-Create New Role
+Create New Permission
 @endslot
 @slot('modalbody')
-<form id="deleteRoleForm" class="form-horizontal" autocomplete="ignore">
+<form id="deletePermissionForm" class="form-horizontal" autocomplete="ignore">
 {{csrf_field()}}
 </form>
-<form id="addRoleForm" class="form-horizontal" autocomplete="ignore">
+<form id="addPermissionForm" class="form-horizontal" autocomplete="ignore">
     {{csrf_field()}}
 
     @component('bladecomponents.form-tabs')
@@ -37,38 +37,14 @@ Create New Role
     @slot('tab1content')
     <div class="input-group input-group-sm mb-3">
         <span class="input-group-text">
-            @component('svg_icons.role') @slot('width') 24 @endslot @slot('height') 24 @endslot @endcomponent
+            @component('svg_icons.permissions') @slot('width') 24 @endslot @slot('height') 24 @endslot @endcomponent
             &nbsp;
             Name</span>
-        <input type="text" class="form-control" placeholder="Role Name" name="name" aria-label="notification">
+        <input type="text" class="form-control" placeholder="Permission Name" name="name" aria-label="notification">
     </div>
     @endslot
 
-    @slot('tab2')
-    @component('svg_icons.permissions') @slot('width')15 @endslot @slot('height') 15 @endslot @endcomponent
-    &nbsp; Permissions
-    @endslot
-
-    @slot('tab2content')
-    <div class="table-responsive" id="rolePermissionsTableDiv">
-                            <table id="rolePermissionsTable" class="table table-bordered rolePermissionsTable">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Permissions</th>
-                                        <th scope="col" class="text-center">Actions
-                                        <button type="button" title="Add Row" class="rolePermissionAddButton"> @component('svg_icons.create2') @slot('width') 18 @endslot @slot('height') 18 @endslot  @endcomponent</button>
-                                        <button type="button"  title="Delete selected Rows" class="ms-2 rolePermissiondeleteButton"> @component('svg_icons.delete') @slot('width') 18 @endslot @slot('height') 18 @endslot  @endcomponent
-                                             </th>
-
-                                    </tr>
-                                </thead>
-                                <tbody id="rolePermissionsTableBody">
-
-
-                                </tbody>
-                            </table>
-                        </div>
-    @endslot
+   
 
     @endcomponent
 </form>
@@ -86,7 +62,7 @@ Create New Role
  @component('bladecomponents.modal')
 
 @slot('modalid')
-editRoleModal
+editPermissionModal
 @endslot
 @slot('enableLoader')
 1
@@ -99,11 +75,11 @@ erpModal
 @endslot
 @slot('modaltitle')
 @component('svg_icons.createform1') @slot('width') 40 @endslot @slot('height') 40 @endslot @endcomponent
- Edit Role
+ Edit Permission
 @endslot
 @slot('modalbody')
 
-<form id="editRoleForm" class="form-horizontal" autocomplete="ignore">
+<form id="editPermissionForm" class="form-horizontal" autocomplete="ignore">
     {{csrf_field()}}
     <input type="hidden" id="editingId">
     @component('bladecomponents.form-tabs')
@@ -118,21 +94,14 @@ erpModal
     @slot('tab1content')
     <div class="input-group input-group-sm mb-3">
         <span class="input-group-text">
-            @component('svg_icons.role') @slot('width') 24 @endslot @slot('height') 24 @endslot @endcomponent
+            @component('svg_icons.permissions') @slot('width') 24 @endslot @slot('height') 24 @endslot @endcomponent
             &nbsp;
             Name</span>
-        <input type="text" id="editRoleName" class="form-control" placeholder="Role Name" name="name" aria-label="notification">
+        <input type="text" id="editPermissionName" class="form-control" placeholder="Permission Name" name="name" aria-label="notification">
     </div>
     @endslot
 
-    @slot('tab2')
-    @component('svg_icons.permissions') @slot('width')15 @endslot @slot('height') 15 @endslot @endcomponent
-    &nbsp; Permissions
-    @endslot
-
-    @slot('tab2content')
-    second tab
-    @endslot
+  
 
     @endcomponent
 </form>
@@ -150,30 +119,16 @@ erpModal
 @endsection
 
 @section('mustache_templates')
-<template id="roleRowTemplate">
+<template id="permissionRowTemplate">
 
     <tr class="@{{highlight}}">
         <td>@{{id}}<input type='hidden' class="editid" value="@{{id}}"><input type='hidden' class="deleteDisplay" value="@{{name}}"></td>
-        <td class="roleName">@{{name}}</td>
+        <td class="permissionName">@{{name}}</td>
         <td>
-            <button type="button" title="Edit Role" class="editButton"> @component('svg_icons.edit1') @slot('width') 18 @endslot @slot('height') 18 @endslot  @endcomponent</button>
-            <button type="button"  title="Delete Role" class="ms-2 deleteButton"> @component('svg_icons.delete') @slot('width') 18 @endslot @slot('height') 18 @endslot  @endcomponent
+            <button type="button" title="Edit Permission" class="editButton"> @component('svg_icons.edit1') @slot('width') 18 @endslot @slot('height') 18 @endslot  @endcomponent</button>
+            <button type="button"  title="Delete Permission" class="ms-2 deleteButton"> @component('svg_icons.delete') @slot('width') 18 @endslot @slot('height') 18 @endslot  @endcomponent
             
 
-        </td>
-
-
-    </tr>
-
-</template>
-
-<template id="rolePermissionsRowTemplate">
-
-    <tr>
-       
-        <td><input type='hidden' class="permissionid" value="@{{id}}"><input type="text" class="form-control form-control-sm permissionid"></td>
-        <td class="text-center">
-           <input type="checkbox" class="rowCheckbox">
         </td>
 
 
@@ -196,29 +151,29 @@ erpModal
                         <div class="row">
                             <div class="mt-5 col-xl-12 col-md-12 col-sm-12 col-12 row">
                                 <div class="col-md-4">
-                                    <h4>Roles
+                                    <h4>Permissions
                                     <span id="pageLoader" class="erploader d-none"></span>
                                     </h4>
                                 </div>
                                 <div class="col-md-4">
                                     <!-- <input class="form-control-sm" type="search" placeholder="search here" id="search"> -->
-                                    <input type="text" class="w-100 form-control role-search br-30" id="RoleTableSearch" placeholder="Search Here...">
+                                    <input type="text" class="w-100 form-control permission-search br-30" id="PermissionTableSearch" placeholder="Search Here...">
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="btn-group  mb-2 me-4" role="group">
+                                    <div class="btn-group  mb-2 me-4" permission="group">
                                         <button id="btndefault6" type="button" class="btn btn-sm btn-dark dropdown-toggle _effect--ripple waves-effect waves-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             @component('svg_icons.selectlist') @slot('width') 24 @endslot @slot('height') 24 @endslot @slot('fill') #ffff @endslot @endcomponent
                                             Select Option </button>
                                         <div class="dropdown-menu" aria-labelledby="btndefault6" style="">
 
-                                            <a href="#" class="dropdown-item" id="addRoleButton"><i class="flaticon-gear-fill mr-1"></i>
+                                            <a href="#" class="dropdown-item" id="addPermissionButton"><i class="flaticon-gear-fill mr-1"></i>
                                                 @component('svg_icons.add') @slot('width') 24 @endslot @slot('height') 24 @endslot @slot('fill') #000 @endslot @endcomponent
 
-                                                Add New Role</a>
-                                            <a href="#" class="dropdown-item" id="viewRoleButton"><i class="flaticon-bell-fill-2 mr-1"></i>
+                                                Add New Permission</a>
+                                            <a href="#" class="dropdown-item" id="viewPermissionButton"><i class="flaticon-bell-fill-2 mr-1"></i>
                                                 @component('svg_icons.view') @slot('width') 24 @endslot @slot('height') 24 @endslot @slot('fill') #000 @endslot @endcomponent
 
-                                                View Roles</a>
+                                                View Permissions</a>
                                         </div>
                                     </div>
                                 </div>
@@ -228,8 +183,8 @@ erpModal
                     </div>
                     <div class="widget-content widget-content-area">
 
-                        <div class="table-responsive clusteriseScrollHeight" id="RolesTableDiv">
-                            <table id="RolesTable" class="table table-bordered">
+                        <div class="table-responsive clusteriseScrollHeight" id="PermissionsTableDiv">
+                            <table id="PermissionsTable" class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
@@ -238,7 +193,7 @@ erpModal
 
                                     </tr>
                                 </thead>
-                                <tbody id="RolesTableBody">
+                                <tbody id="PermissionsTableBody">
 
 
                                 </tbody>
@@ -262,8 +217,7 @@ erpModal
 
 
 <script src="{{URL::asset('/Application/Services/PermissionServices.js')}}"></script>
-<script src="{{URL::asset('/Application/Services/RoleServices.js')}}"></script>
-<script src="{{URL::asset('/Application/roles.js')}}"></script>
+<script src="{{URL::asset('/Application/permissions.js')}}"></script>
 
 @endsection
 

@@ -112,3 +112,10 @@
       transform: translateX(0%);
     }
   }
+
+  tr.highlight td
+  {
+    background-color: #4361ee !important ;
+    color:white !important;
+    
+  }

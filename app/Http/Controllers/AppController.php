@@ -23,4 +23,8 @@ class AppController extends Controller
     {
         return view('roles');
     }
+    public function permissions()
+    {
+        return view('permissions');
+    }
 }

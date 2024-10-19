@@ -37,9 +37,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
-        if ($exception instanceof \Illuminate\Database\QueryException) {
-            return Response::json(['databaseError'=>$exception->getMessage()]);
-        }
+       
 
         parent::report($exception);
     }
@@ -55,6 +53,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof \Illuminate\Database\QueryException) {
+          
+            return Response::json(['status'=>'error','message'=>$exception->getMessage(),'type'=>'DB']);
+        }
+
         return parent::render($request, $exception);
     }
 }
