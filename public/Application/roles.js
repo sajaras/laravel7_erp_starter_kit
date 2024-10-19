@@ -26,13 +26,14 @@ const permissionService = new PermissionService({});
 
 roleService.enableClusterize();
 
-
-
 $(document).ready(function () {
 
 
     $("#RolesTable").tableHeadFixer();
-    permissionService.fetchPermissions();
+     permissionService.fetchPermissions();
+     
+  
+
 console.log(permissionService.getPermissions());
 
     $(document).on('click', '#viewRoleButton', function () {
@@ -96,6 +97,19 @@ console.log(permissionService.getPermissions());
 
 
     $(document).find("#viewRoleButton").trigger("click");
+
+    $("#rolePermissionsTable tbody, #rolePermissionsEditTable tbody").dynamicautocompletion({customwidgetclass:"ui-autocomplete-900px",datamethod:"alasql",
+        datalabel :["id","-","name"],datahiddenvalue:['id'],datavalue:["id"],datadesc:["name"],
+        onselection:{
+                "#rolePermissionsTable":{ emptylisttext:"Permission List Empty",tdclass:'.permissionValue',superentity:".permissionDisplay",setext:"desc",hiddenfield:".permissionId",hfuivalue:"gid"},
+                "#rolePermissionsEditTable":{ emptylisttext:"Permission List Empty",tdclass:'.permissionValue',superentity:".permissionDisplay",setext:"desc",hiddenfield:".permissionId",hfuivalue:"gid"},
+        },
+        datasourcefromalasql:function(){
+                
+                return permissionService.getPermissions();
+    
+        }
+    });
 
 });
 

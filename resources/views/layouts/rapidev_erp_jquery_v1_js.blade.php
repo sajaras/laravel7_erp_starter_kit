@@ -1,8 +1,9 @@
 <script src="{{URL::asset('/rapidev_erp_jquery_v1/jquery-3.2.1.min.js')}}"></script>
-<script src="{{URL::asset('/rapidev_erp_jquery_v1/alasql/alasql.min.js')}}"></script>
+<script src="{{URL::asset('/rapidev_erp_jquery_v1/jquery-ui.min.js')}}"></script>
+<script src="{{URL::asset('/rapidev_erp_jquery_v1/alasql/dist/alasql.min.js')}}"></script>
 <script src="{{URL::asset('/rapidev_erp_jquery_v1/clusterisejs/clusterize.min.js')}}"></script>
 <script src="{{URL::asset('/rapidev_erp_jquery_v1/adddeleteupdate2.js')}}"></script>
-<script src="{{URL::asset('/rapidev_erp_jquery_v1/toast/dist/jquery.toast.min.js')}}"></script>
+<!-- <script src="{{URL::asset('/rapidev_erp_jquery_v1/toast/dist/jquery.toast.min.js')}}"></script> -->
 <script src="{{URL::asset('/rapidev_erp_jquery_v1/ajaxrequests.js')}}"></script>
 <script src="{{URL::asset('/rapidev_erp_jquery_v1/formsearch2.0.js')}}"></script>
 <script src="{{URL::asset('/rapidev_erp_jquery_v1/main.js')}}"></script>

@@ -32,7 +32,8 @@ class RoleService
 
     public function getRole($roleId)
     {
-        return Role::find($roleId);
+        $this->role = Role::find($roleId);
+        return $this->role;
     }
 
     public function updateRole($roleId,$name)
@@ -41,6 +42,7 @@ class RoleService
         $role  = Role::find($roleId);
         $role->name = $name;
         $role->save();
+        $this->role = $role;
         return $role;
     }
     public function deleteRole($roleId)

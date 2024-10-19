@@ -38,7 +38,9 @@ class RoleController extends Controller
              return DB::transaction(function () use ($request,$roleService){
                 $result = [];
                 $result['result'] = [];
-                $result['result']['role'] = $roleService->createRole($request->name);
+                $role = $roleService->createRole($request->name);
+                $roleService->assignPermissions($request->permissions);
+                $result['result']['role'] = $role;
                 $result['status'] = 'success';
                 return Response::json($result);
             });
@@ -81,6 +83,7 @@ class RoleController extends Controller
                 $result = [];
                 $result['result'] = [];
                 $result['result']['role'] = $roleService->updateRole($id,$request->name);
+                $roleService->assignPermissions($request->permissions);
                 $result['status'] = 'success';
                 return Response::json($result);
             });
@@ -106,6 +109,8 @@ class RoleController extends Controller
              return DB::transaction(function () use ($request,$roleService,$id){
                 $result = [];
                 $result['result'] = [];
+                $roleService->getRole($id);
+                $roleService->assignPermissions([]);
                 $result['result']['role'] = $roleService->deleteRole($id);
                 $result['status'] = 'success';
                 return Response::json($result);

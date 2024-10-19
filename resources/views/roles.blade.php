@@ -131,7 +131,24 @@ erpModal
     @endslot
 
     @slot('tab2content')
-    second tab
+    <div class="table-responsive" id="rolePermissionsEditTableDiv">
+                            <table id="rolePermissionsEditTable" class="table table-bordered rolePermissionsTable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Permissions</th>
+                                        <th scope="col" class="text-center">Actions
+                                        <button type="button" title="Add Row" class="rolePermissionAddButton"> @component('svg_icons.create2') @slot('width') 18 @endslot @slot('height') 18 @endslot  @endcomponent</button>
+                                        <button type="button"  title="Delete selected Rows" class="ms-2 rolePermissiondeleteButton"> @component('svg_icons.delete') @slot('width') 18 @endslot @slot('height') 18 @endslot  @endcomponent
+                                             </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="rolePermissionsEditTableBody">
+
+
+                                </tbody>
+                            </table>
+                        </div>
     @endslot
 
     @endcomponent
@@ -171,7 +188,10 @@ erpModal
 
     <tr>
        
-        <td><input type='hidden' class="permissionid" value="@{{id}}"><input type="text" class="form-control form-control-sm permissionid"></td>
+        <td><input type='hidden' class="permissionId" name="permissions[]" value="@{{id}}">
+        <input type="text" class="form-control form-control-sm permissionValue"  value="@{{permissionValue}}">
+        <p class=" autoCompleteDisplayBox"> <span class="ms-1 permissionDisplay"> @{{permissionDisplay}} </span></p>
+    </td>
         <td class="text-center">
            <input type="checkbox" class="rowCheckbox">
         </td>

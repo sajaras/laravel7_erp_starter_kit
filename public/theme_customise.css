@@ -119,3 +119,11 @@
     color:white !important;
     
   }
+
+  .autoCompleteDisplayBox
+  {
+    color: black !important;
+    background: #a2abb3 !important;
+    padding: 0px;
+    margin: 0px;
+  }
