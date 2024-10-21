@@ -8,6 +8,7 @@ use App\APIServices\RoleService;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use DB;
+use App\Role;
 class RoleController extends Controller
 {
     /**
@@ -15,6 +16,13 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+         $this->authorizeResource(Role::class, 'role');
+     }
+
+
     public function index(RoleService $roleService)
     {
         $result = [];
@@ -58,12 +66,12 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id,RoleService $roleService)
+    public function show(Role $role,RoleService $roleService)
     {
         $response = [];
         $response['status'] = 'success';
         $response['result'] = [];
-        $response['result']['role'] = $roleService->getRole($id);
+        $response['result']['role'] = $roleService->getRole($role->id);
         return Response::json($response);
     }
 
@@ -74,15 +82,15 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id,Request $request,RoleService $roleService)
+    public function update(Role $role,Request $request,RoleService $roleService)
     {
         $validator = Validator::make($request->all(),[]);
         if ($validator->passes()) {
 
-             return DB::transaction(function () use ($request,$roleService,$id){
+             return DB::transaction(function () use ($request,$roleService,$role){
                 $result = [];
                 $result['result'] = [];
-                $result['result']['role'] = $roleService->updateRole($id,$request->name);
+                $result['result']['role'] = $roleService->updateRole($role->id,$request->name);
                 $roleService->assignPermissions($request->permissions);
                 $result['status'] = 'success';
                 return Response::json($result);
@@ -101,17 +109,17 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,Request $request,RoleService $roleService)
+    public function destroy(Role $role,Request $request,RoleService $roleService)
     {
         $validator = Validator::make($request->all(),[]);
         if ($validator->passes()) {
 
-             return DB::transaction(function () use ($request,$roleService,$id){
+             return DB::transaction(function () use ($request,$roleService,$role){
                 $result = [];
                 $result['result'] = [];
                 $roleService->getRole($id);
                 $roleService->assignPermissions([]);
-                $result['result']['role'] = $roleService->deleteRole($id);
+                $result['result']['role'] = $roleService->deleteRole($role->id);
                 $result['status'] = 'success';
                 return Response::json($result);
             });

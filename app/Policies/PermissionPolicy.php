@@ -18,6 +18,7 @@ class PermissionPolicy
      */
     public function viewAny(User $user)
     {
+       
         if($user->can('show-permission'))
         {
             return true;
@@ -60,9 +61,10 @@ class PermissionPolicy
      * @param  \App\Permission  $permission
      * @return mixed
      */
+   
     public function update(User $user, Permission $permission)
     {
-       
+      
         if($user->can('edit-permission',\App\Permission::class))
         {
             return true;
@@ -93,6 +95,7 @@ class PermissionPolicy
     //  */
     // public function restore(User $user, Permission $permission)
     // {
+       
     //     if($user->can('create-permission'))
     //     {
     //         return true;

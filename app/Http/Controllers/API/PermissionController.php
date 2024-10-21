@@ -25,6 +25,7 @@ class PermissionController extends Controller
      */
     public function index(PermissionService $permissionService)
     {
+    
         $result = [];
         $result['permissions'] = $permissionService->getAllPermissions();
         return Response::json(['status' => 'success', 'result' => $result]);
@@ -60,12 +61,12 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, PermissionService $permissionService)
+    public function show(Permission $permission, PermissionService $permissionService)
     {
         $response = [];
         $response['status'] = 'success';
         $response['result'] = [];
-        $response['result']['permission'] = $permissionService->getPermission($id);
+        $response['result']['permission'] = $permissionService->getPermission($permission->id);
         return Response::json($response);
     }
 
@@ -76,15 +77,15 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, PermissionService $permissionService)
+    public function update(Request $request,Permission $permission, PermissionService $permissionService)
     {
         $validator = Validator::make($request->all(), []);
         if ($validator->passes()) {
 
-            return DB::transaction(function () use ($request, $permissionService, $id) {
+            return DB::transaction(function () use ($request, $permissionService, $permission) {
                 $result = [];
                 $result['result'] = [];
-                $result['result']['permission'] = $permissionService->updatePermission($id, $request->name);
+                $result['result']['permission'] = $permissionService->updatePermission($permission->id, $request->name);
                 $result['status'] = 'success';
                 return Response::json($result);
             });
@@ -99,15 +100,15 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Request $request, PermissionService $permissionService)
+    public function destroy(Permission $permission, Request $request, PermissionService $permissionService)
     {
         $validator = Validator::make($request->all(), []);
         if ($validator->passes()) {
 
-            return DB::transaction(function () use ($request, $permissionService, $id) {
+            return DB::transaction(function () use ($request, $permissionService, $permission) {
                 $result = [];
                 $result['result'] = [];
-                $result['result']['permission'] = $permissionService->deletePermission($id);
+                $result['result']['permission'] = $permissionService->deletePermission($permission->id);
                 $result['status'] = 'success';
                 return Response::json($result);
             });
