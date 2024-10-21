@@ -19,7 +19,7 @@ class RoleController extends Controller
 
      public function __construct()
      {
-         $this->authorizeResource(Role::class, 'role');
+        //  $this->authorizeResource(Role::class, 'role');
      }
 
 
@@ -117,7 +117,7 @@ class RoleController extends Controller
              return DB::transaction(function () use ($request,$roleService,$role){
                 $result = [];
                 $result['result'] = [];
-                $roleService->getRole($id);
+                $roleService->getRole($role->id);
                 $roleService->assignPermissions([]);
                 $result['result']['role'] = $roleService->deleteRole($role->id);
                 $result['status'] = 'success';
