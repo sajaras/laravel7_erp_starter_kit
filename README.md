@@ -3,7 +3,7 @@ laravel : 7.x
 php : >= 7.4
 postgres: >= 9.3
 
-# Steps for Setting up a new laravel ,Jquery Base project using this package . 
+## Steps for Setting up a new laravel ,Jquery Base project using this package . 
 
 ### clone the project 
 ```python
