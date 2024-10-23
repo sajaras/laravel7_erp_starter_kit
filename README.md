@@ -33,11 +33,10 @@ appenddata.client_id = "<client_id>";
 
  ###  Setting new git  for the project 
 
- sudo rm -r .git 
- git init 
+ sudo rm -r .git
+git init
 
 
- 
 
 
 
