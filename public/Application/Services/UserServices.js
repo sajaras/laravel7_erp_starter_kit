@@ -137,6 +137,7 @@ class UserService {
         var allrows = [];
         console.log(userObj);
         var userRowTemplate = $(userObj.params.displayTableRowTemplate).html();
+        $(userObj.params.displayTable).find('tbody').html('');
         if (users.length) {
 
             for (var userindex in users) {
@@ -157,7 +158,9 @@ class UserService {
             // });
         }
         else {
-            $(userObj.params.displayTable).find('tbody').html("<tr><td colspan='4' class='text-center'>No Records Found</td></tr>");
+            allrows.push("<tr><td colspan='4' class='text-center'>No Records Found</td></tr>");
+            userObj.userTableCluster.update(allrows);
+           
         }
 
     }

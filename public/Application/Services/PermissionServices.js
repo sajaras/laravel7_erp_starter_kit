@@ -155,7 +155,8 @@ class PermissionService {
             // });
         }
         else {
-            $(permissionObj.params.displayTable).find('tbody').html("<tr><td colspan='4' class='text-center'>No Records Found</td></tr>");
+            allrows.push("<tr><td colspan='4' class='text-center'>No Records Found</td></tr>");
+            permissionObj.permissionTableCluster.update(allrows);
         }
 
     }

@@ -26,7 +26,7 @@ var userServiceParams = {
 
 };
 const userService = new UserService(userServiceParams);
-const permissionService = new RoleService({});
+const roleService = new RoleService({});
 
 userService.enableClusterize();
 
@@ -34,11 +34,11 @@ $(document).ready(function () {
 
 
     $("#UsersTable").tableHeadFixer();
-     permissionService.fetchRoles();
+     roleService.fetchRoles();
      
   
 
-console.log(permissionService.getRoles());
+console.log(roleService.getRoles());
 
     $(document).on('click', '#viewUserButton', function () {
         userService.startPageLoader();
@@ -110,12 +110,12 @@ console.log(permissionService.getRoles());
     $("#userRolesTable tbody, #userRolesEditTable tbody").dynamicautocompletion({customwidgetclass:"ui-autocomplete-900px",datamethod:"alasql",
         datalabel :["id","-","name"],datahiddenvalue:['id'],datavalue:["id"],datadesc:["name"],
         onselection:{
-                "#userRolesTable":{ emptylisttext:"Role List Empty",tdclass:'.permissionValue',superentity:".permissionDisplay",setext:"desc",hiddenfield:".permissionId",hfuivalue:"gid"},
-                "#userRolesEditTable":{ emptylisttext:"Role List Empty",tdclass:'.permissionValue',superentity:".permissionDisplay",setext:"desc",hiddenfield:".permissionId",hfuivalue:"gid"},
+                "#userRolesTable":{ emptylisttext:"Role List Empty",tdclass:'.roleValue',superentity:".roleDisplay",setext:"desc",hiddenfield:".roleId",hfuivalue:"gid"},
+                "#userRolesEditTable":{ emptylisttext:"Role List Empty",tdclass:'.roleValue',superentity:".roleDisplay",setext:"desc",hiddenfield:".roleId",hfuivalue:"gid"},
         },
         datasourcefromalasql:function(){
                 
-                return permissionService.getRoles();
+                return roleService.getRoles();
     
         }
     });

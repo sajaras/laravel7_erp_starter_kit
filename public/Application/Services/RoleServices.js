@@ -157,7 +157,8 @@ class RoleService {
             // });
         }
         else {
-            $(roleObj.params.displayTable).find('tbody').html("<tr><td colspan='4' class='text-center'>No Records Found</td></tr>");
+            allrows.push("<tr><td colspan='4' class='text-center'>No Records Found</td></tr>");
+            roleObj.roleTableCluster.update(allrows);
         }
 
     }
