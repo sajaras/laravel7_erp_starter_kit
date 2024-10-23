@@ -1,7 +1,7 @@
 ##  Requirements for installing this base project 
-laravel : 7.x
-php : >= 7.4
-postgres: >= 9.3
+laravel : 7.x  <br />
+php : >= 7.4   <br />
+postgres: >= 9.3  <br />
 
 ## Steps for Setting up a new laravel ,Jquery Base project using this package . 
 
@@ -15,9 +15,9 @@ cd laravel7_erp_starter_kit
 composer install
 ```
 ### Setting Database
-create new postgres database
+create new postgres database  <br />
 `cp .env.example .env`
-change database credentials and run the following
+change database credentials and run the following  <br />
 
 ```python
 php artisan config:cache
