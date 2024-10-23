@@ -25,11 +25,11 @@ php artisan migrate
 php artisan passport:install
 ```
 ###  Setting client id  
-copy the client id of password grant client recieved after running hp artisan passport:install
+copy the client id of password grant client recieved after running php artisan passport:install <br />
 update client id and client secret in file login.blade.php
-reference :  
-appenddata.client_id = "<client_id>";
- appenddata.client_secret = "<client_secret>";
+reference :  <br />
+appenddata.client_id = "<client_id>";  <br />
+ appenddata.client_secret = "<client_secret>"; <br />
 
  ###  Setting new git  for the project 
 
