@@ -42,6 +42,23 @@ Create New User
             Name</span>
         <input type="text" class="form-control" placeholder="User Name" name="name" aria-label="notification">
     </div>
+
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text">
+            @component('svg_icons.permissions') @slot('width') 24 @endslot @slot('height') 24 @endslot @endcomponent
+            &nbsp;
+            Email</span>
+        <input type="text" class="form-control" placeholder="Enter Email" name="email" aria-label="email">
+    </div>
+    
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text">
+            @component('svg_icons.permissions') @slot('width') 24 @endslot @slot('height') 24 @endslot @endcomponent
+            &nbsp;
+            Phone Number</span>
+        <input type="text" class="form-control" placeholder="Enter Phone Number" name="phone_number" aria-label="phone_number">
+    </div>
+    
     @endslot
 
     @slot('tab2')
@@ -122,6 +139,22 @@ erpModal
             &nbsp;
             Name</span>
         <input type="text" id="editUserName" class="form-control" placeholder="User Name" name="name" aria-label="notification">
+    </div>
+
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text">
+            @component('svg_icons.permissions') @slot('width') 24 @endslot @slot('height') 24 @endslot @endcomponent
+            &nbsp;
+            Email</span>
+        <input type="text" id="editUserEmail" class="form-control" placeholder="Enter Email" name="email" aria-label="email">
+    </div>
+    
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text">
+            @component('svg_icons.permissions') @slot('width') 24 @endslot @slot('height') 24 @endslot @endcomponent
+            &nbsp;
+            Phone Number</span>
+        <input type="text" id="editUserPhoneNumber" class="form-control" placeholder="Enter Phone Number" name="phone_number" aria-label="phone_number">
     </div>
     @endslot
 

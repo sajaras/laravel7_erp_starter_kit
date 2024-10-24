@@ -178,6 +178,8 @@ class UserService {
         var $EditModal = $(userObj.params.editFormModal);
         $EditModal.find('#editingId').val(userObj.editUser.id);
         $EditModal.find('#editUserName').val(userObj.editUser.name);
+        $EditModal.find('#editUserEmail').val(userObj.editUser.email);
+        $EditModal.find('#editUserPhoneNumber').val(userObj.editUser.phone_number);
         $EditModal.modal('show');
     }
     displayEditFormRolesTab(userRoles, userObj) {

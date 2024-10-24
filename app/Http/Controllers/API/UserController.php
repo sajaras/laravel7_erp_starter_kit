@@ -46,10 +46,11 @@ class UserController extends Controller
              return DB::transaction(function () use ($request,$userService){
                 $result = [];
                 $result['result'] = [];
-                $user = $userService->createUser($request->name);
+                $userService->createUser($request);
                 $userService->assignRoles($request->roles);
-                $result['result']['user'] = $user;
-                $result['status'] = 'success';
+                $result['result']['user'] = $userService->getUser();
+                $result['result']['password'] = $userService->getPassword();
+                $result['status'] = $userService->getStatus();
                 return Response::json($result);
             });
             
@@ -71,7 +72,7 @@ class UserController extends Controller
         $response = [];
         $response['status'] = 'success';
         $response['result'] = [];
-        $response['result']['user'] = $userService->getUser($user->id);
+        $response['result']['user'] = $user;
         return Response::json($response);
     }
 
@@ -90,9 +91,11 @@ class UserController extends Controller
              return DB::transaction(function () use ($request,$userService,$user){
                 $result = [];
                 $result['result'] = [];
-                $result['result']['user'] = $userService->updateUser($user->id,$request->name);
+                $userService->setUser($user->id);
+                $userService->updateUser($request);
                 $userService->assignRoles($request->roles);
-                $result['status'] = 'success';
+                $result['result']['user'] = $userService->getUser();
+                $result['status'] = $userService->getStatus();
                 return Response::json($result);
             });
             
@@ -117,10 +120,11 @@ class UserController extends Controller
              return DB::transaction(function () use ($request,$userService,$user){
                 $result = [];
                 $result['result'] = [];
-                $userService->getUser($id);
+                $userService->setUser($user->id);
                 $userService->assignRoles([]);
-                $result['result']['user'] = $userService->deleteUser($user->id);
-                $result['status'] = 'success';
+                $userService->deleteUser();
+                $result['result']['user'] = $userService->getUser();
+                $result['status'] = $userService->getStatus();
                 return Response::json($result);
             });
             
@@ -134,9 +138,10 @@ class UserController extends Controller
     public function getRoles($userId,UserService $userService)
     {
         $result = [];
-        $result['status'] = 'success';
         $result['result'] = [];
-        $result['result']['roles'] = $userService->getRoles($userId);
+        $userService->setUser($userId);
+        $result['result']['roles'] = $userService->getRoles();
+        $result['status'] =  'success';
         return $result;
 
     }
