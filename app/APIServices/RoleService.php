@@ -4,55 +4,74 @@ namespace App\APIServices;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\AppConstants;
 
 class RoleService
 {
 
     protected $role;
+    protected $status;
     public function __construct() {}
+
+    public function getRole()
+    {
+        return $this->role;
+    }
+  
+    public function setRole($roleId)
+    {
+        $this->role = Role::find($roleId);
+    }
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+
+
 
     public function getAllRoles()
     {
 
-
         return Role::all();
     }
 
-    public function createRole($roleName)
+    public function createRole($request)
     {
-        $this->role = Role::create(['name' => $roleName]);
-        return $this->role;
+        $this->role = Role::create(['name' => $request->name]);
+
+        if($this->role)
+        {
+            $this->status = AppConstants::CREATED;
+        }
+        
+      
     }
 
     public function assignPermissions($permissionIds)
     {
         $this->role->syncPermissions($permissionIds);
-        return $this->role;
+        
     }
 
-    public function getRole($roleId)
+    public function updateRole($request)
     {
-        $this->role = Role::find($roleId);
-        return $this->role;
+        $this->role->name = $request->name;
+        if($this->role->save())
+        {
+            $this->status = AppConstants::UPDATED;
+        }
     }
-
-    public function updateRole($roleId,$name)
+    public function deleteRole()
     {
-       
-        $role  = Role::find($roleId);
-        $role->name = $name;
-        $role->save();
-        $this->role = $role;
-        return $role;
-    }
-    public function deleteRole($roleId)
-    {
-        return Role::find($roleId)->delete();
+        if($this->role->delete())
+        {
+            $this->status = AppConstants::DELETED;
+        }
     }
 
-    public function getPermissions($roleId){
+    public function getPermissions(){
 
-        return Role::find($roleId)->getAllPermissions();
-
+        return $this->role->getAllPermissions();
     }
 }

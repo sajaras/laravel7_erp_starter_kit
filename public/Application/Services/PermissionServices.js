@@ -18,7 +18,7 @@ class PermissionService {
         });
     }
 
-    fetchPermissions(callback, errorcallback) {
+    fetchPermissions(callback=null, errorcallback=null) {
         
         var permissionObj = this;
         return ajax_request_formless({ url: '/api/permissions', headers: getapiRequestheaders(), method: 'get', data: {} }, function (response) {
@@ -26,12 +26,19 @@ class PermissionService {
 
             if (response.status == 'success') {
                 permissionObj.permissions = response.result.permissions;
-
-                callback(response.result.permissions, permissionObj);
+                if(callback)
+                {
+                    callback(response.result.permissions, permissionObj);
+                }
+                
 
             }
             if (response.status == 'error') {
-                errorcallback(response, permissionObj);
+                if(errorcallback)
+                {
+                    errorcallback(response, permissionObj);
+                }
+                
             }
 
         });

@@ -205,7 +205,7 @@ erpModal
 @section('content')
 
 <div class="container">
-    <div class="container">
+    <div class="">
 
 
         <div class="row layout-top-spacing">
@@ -213,34 +213,44 @@ erpModal
             <div  class="col-lg-12 col-12 layout-spacing">
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
-                        <div class="row">
+                    <div class="row">
                             <div class="mt-5 col-xl-12 col-md-12 col-sm-12 col-12 row">
-                                <div class="col-md-4">
-                                    <h4>Roles
+                                <div class="col-6 col-lg-2">
+                                    <h4 >Roles
                                     <span id="pageLoader" class="erploader d-none"></span>
                                     </h4>
                                 </div>
-                                <div class="col-md-4">
-                                    <!-- <input class="form-control-sm" type="search" placeholder="search here" id="search"> -->
-                                    <input type="text" class="w-100 form-control role-search br-30" id="RoleTableSearch" placeholder="Search Here...">
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="btn-group  mb-2 me-4" role="group">
-                                        <button id="btndefault6" type="button" class="btn btn-sm btn-dark dropdown-toggle _effect--ripple waves-effect waves-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               
+                                <div class="col-6 col-lg-6">
+                                    <div class="btn-group  mb-2 me-4" permission="group">
+                                        <button id="addRoleButton" type="button" class="btn btn-sm btn-success" title="Add Role" >
+                                            @component('svg_icons.add') @slot('width') 24 @endslot @slot('height') 24 @endslot @slot('fill') #ffff @endslot @endcomponent
+                                            <span class="d-none d-lg-inline-block">Add New Role</span>
+                                             </button>
+
+                                             <button id="viewRoleButton" type="button" class="ms-1 btn btn-sm bg-orange text-white" title="View Roles" >
+                                            @component('svg_icons.view') @slot('width') 24 @endslot @slot('height') 24 @endslot @slot('fill') #ffff @endslot @endcomponent
+                                            <span class="d-none d-lg-inline-block">View Roles</span>
+                                             </button>
+                                             <button id="others" type="button" class="ms-1 btn btn-sm btn-dark dropdown-toggle _effect--ripple waves-effect waves-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             @component('svg_icons.selectlist') @slot('width') 24 @endslot @slot('height') 24 @endslot @slot('fill') #ffff @endslot @endcomponent
-                                            Select Option </button>
+                                            <span class="d-none d-lg-inline-block">Select Option</span> </button>
                                         <div class="dropdown-menu" aria-labelledby="btndefault6" style="">
 
-                                            <a href="#" class="dropdown-item" id="addRoleButton"><i class="flaticon-gear-fill mr-1"></i>
+                                            <a href="#" class="dropdown-item" ><i class="flaticon-gear-fill mr-1"></i>
                                                 @component('svg_icons.add') @slot('width') 24 @endslot @slot('height') 24 @endslot @slot('fill') #000 @endslot @endcomponent
 
-                                                Add New Role</a>
-                                            <a href="#" class="dropdown-item" id="viewRoleButton"><i class="flaticon-bell-fill-2 mr-1"></i>
-                                                @component('svg_icons.view') @slot('width') 24 @endslot @slot('height') 24 @endslot @slot('fill') #000 @endslot @endcomponent
-
-                                                View Roles</a>
+                                               Report PDF</a>
+                                            
                                         </div>
+                                      
+
                                     </div>
+
+                                </div>
+
+                                <div class="col-12 col-lg-4">
+                                    <input type="text" class="searchForm w-100 form-control permission-search br-30" id="RoleTableSearch" placeholder="Search Here...">
                                 </div>
 
                             </div>

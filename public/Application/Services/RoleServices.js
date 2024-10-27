@@ -1,3 +1,4 @@
+
 class RoleService {
     constructor(params) {
         this.roles = [];
@@ -18,7 +19,7 @@ class RoleService {
         });
     }
 
-    fetchRoles(callback, errorcallback) {
+    fetchRoles(callback=null, errorcallback=null) {
 
         var roleObj = this;
         return ajax_request_formless({ url: '/api/roles', headers: getapiRequestheaders(), method: 'get', data: {} }, function (response) {
@@ -26,12 +27,19 @@ class RoleService {
 
             if (response.status == 'success') {
                 roleObj.roles = response.result.roles;
-
-                callback(response.result.roles, roleObj);
+                if(callback)
+                {
+                    callback(response.result.roles, roleObj);
+                }
+                
 
             }
             if (response.status == 'error') {
-                errorcallback(response, roleObj);
+                if(errorcallback)
+                {
+                    errorcallback(response, roleObj);
+                }
+                
             }
 
         });
@@ -112,7 +120,7 @@ class RoleService {
         });
     }
 
-    createRole(callback, errorcallback) {
+    createRole(callback=null, errorcallback=null) {
         var roleObj = this;
         return ajax_request_form({ url: '/api/roles', formid: roleObj.params.AddForm, headers: getapiRequestheaders(), method: 'post' }, function (response) {
 
@@ -120,12 +128,20 @@ class RoleService {
 
             if (response.status == 'success') {
                 roleObj.highLightRole = response.result.role;
-                callback(response.result.role, roleObj);
+                if(callback)
+                {
+                    callback(response.result.role, roleObj);
 
+                }
+                
             }
 
             else if (response.status == 'error') {
-                errorcallback(response, roleObj);
+                if(errorcallback)
+                {
+                    errorcallback(response, roleObj);
+                }
+                
             }
 
 
@@ -189,27 +205,34 @@ class RoleService {
         $(roleObj.params.editModalRolePermissionTable).find('tbody').html(allrows.join(""));
 
     }
-    getRole($id, callback) {
+    getRole($id, callback=null) {
         var roleObj = this;
         return ajax_request_formless({ url: '/api/roles/' + $id, headers: getapiRequestheaders(), method: 'get', data: {} }, function (response) {
             console.log("editresponse", response);
             roleObj.editRole = response.result.role;
             if (response.status == 'success') {
-
-                callback(roleObj);
+                if(callback)
+                {
+                    callback(roleObj);
+                }
+                
 
             }
 
         });
     }
-    getRolePermissions($id, callback) {
+    getRolePermissions($id, callback=null) {
         var roleObj = this;
         return ajax_request_formless({ url: '/api/roles/' + $id + '/permissions', headers: getapiRequestheaders(), method: 'get', data: {} }, function (response) {
             console.log("editrolepermissionsresponse", response);
 
             if (response.status == 'success') {
 
-                callback(response.result.permissions, roleObj);
+                if(callback)
+                {
+                    callback(response.result.permissions, roleObj);
+                }
+                
 
             }
 

@@ -133,3 +133,12 @@
     background-color: #686e6e !important;
     border-color: #000000 !important;
 }
+
+.searchForm
+{
+    border-radius: 0px !important;
+}
+.statbox
+{
+    padding: 0px !important;
+}

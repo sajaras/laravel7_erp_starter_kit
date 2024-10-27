@@ -25,10 +25,11 @@ class PermissionController extends Controller
      */
     public function index(PermissionService $permissionService)
     {
-    
-        $result = [];
-        $result['permissions'] = $permissionService->getAllPermissions();
-        return Response::json(['status' => 'success', 'result' => $result]);
+        $responseData = [];
+        $responseData['result'] = [];
+        $responseData['status'] = 'success';
+        $responseData['result']['permissions'] = $permissionService->getAllPermissions();
+        return Response::json($responseData);
     }
 
     /**
@@ -44,11 +45,11 @@ class PermissionController extends Controller
         if ($validator->passes()) {
 
             return DB::transaction(function () use ($request, $permissionService) {
-                $result = [];
-                $result['result'] = [];
-                $result['result']['permission'] = $permissionService->createPermission($request->name);
-                $result['status'] = 'success';
-                return Response::json($result);
+                $responseData = [];
+                $responseData['result'] = [];
+                $responseData['result']['permission'] = $permissionService->createPermission($request);
+                $responseData['status'] = $permissionService->getStatus();
+                return Response::json($responseData);
             });
         } else {
             return Response::json(['status' => 'error', 'message' => $validator->errors()]);
@@ -63,11 +64,11 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission, PermissionService $permissionService)
     {
-        $response = [];
-        $response['status'] = 'success';
-        $response['result'] = [];
-        $response['result']['permission'] = $permissionService->getPermission($permission->id);
-        return Response::json($response);
+        $responseData = [];
+        $responseData['status'] = 'success';
+        $responseData['result'] = [];
+        $responseData['result']['permission'] =  $permission;
+        return Response::json($responseData);
     }
 
     /**
@@ -77,17 +78,18 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Permission $permission, PermissionService $permissionService)
+    public function update(Request $request, Permission $permission, PermissionService $permissionService)
     {
         $validator = Validator::make($request->all(), []);
         if ($validator->passes()) {
 
             return DB::transaction(function () use ($request, $permissionService, $permission) {
-                $result = [];
-                $result['result'] = [];
-                $result['result']['permission'] = $permissionService->updatePermission($permission->id, $request->name);
-                $result['status'] = 'success';
-                return Response::json($result);
+                $permissionService->setPermission($permission->id);
+                $responseData = [];
+                $responseData['result'] = [];
+                $responseData['result']['permission'] = $permissionService->updatePermission($request);
+                $responseData['status'] = $permissionService->getStatus();
+                return Response::json($responseData);
             });
         } else {
             return Response::json(['status' => 'error', 'message' => $validator->errors()]);
@@ -106,11 +108,12 @@ class PermissionController extends Controller
         if ($validator->passes()) {
 
             return DB::transaction(function () use ($request, $permissionService, $permission) {
-                $result = [];
-                $result['result'] = [];
-                $result['result']['permission'] = $permissionService->deletePermission($permission->id);
-                $result['status'] = 'success';
-                return Response::json($result);
+                $permissionService->setPermission($permission->id);
+                $responseData = [];
+                $responseData['result'] = [];
+                $responseData['result']['permission'] = $permissionService->deletePermission($permission->id);
+                $responseData['status'] = $permissionService->getStatus();
+                return Response::json($responseData);
             });
         } else {
             return Response::json(['status' => 'error', 'message' => $validator->errors()]);

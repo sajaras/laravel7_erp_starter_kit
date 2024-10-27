@@ -44,12 +44,13 @@ class RoleController extends Controller
         if ($validator->passes()) {
 
              return DB::transaction(function () use ($request,$roleService){
+               
+                $role = $roleService->createRole($request);
+                $roleService->assignPermissions($request->permissions);
                 $result = [];
                 $result['result'] = [];
-                $role = $roleService->createRole($request->name);
-                $roleService->assignPermissions($request->permissions);
-                $result['result']['role'] = $role;
-                $result['status'] = 'success';
+                $result['result']['role'] =$roleService->getRole();
+                $result['status'] =  $roleService->getStatus();
                 return Response::json($result);
             });
             
@@ -71,7 +72,7 @@ class RoleController extends Controller
         $response = [];
         $response['status'] = 'success';
         $response['result'] = [];
-        $response['result']['role'] = $roleService->getRole($role->id);
+        $response['result']['role'] = $role;
         return Response::json($response);
     }
 
@@ -88,11 +89,12 @@ class RoleController extends Controller
         if ($validator->passes()) {
 
              return DB::transaction(function () use ($request,$roleService,$role){
+                $roleService->setRole($role->id);
                 $result = [];
                 $result['result'] = [];
-                $result['result']['role'] = $roleService->updateRole($role->id,$request->name);
+                $result['result']['role'] = $roleService->updateRole($request);
                 $roleService->assignPermissions($request->permissions);
-                $result['status'] = 'success';
+                $result['status'] = $roleService->getStatus();
                 return Response::json($result);
             });
             
@@ -117,10 +119,10 @@ class RoleController extends Controller
              return DB::transaction(function () use ($request,$roleService,$role){
                 $result = [];
                 $result['result'] = [];
-                $roleService->getRole($role->id);
+                $roleService->setRole($role->id);
                 $roleService->assignPermissions([]);
-                $result['result']['role'] = $roleService->deleteRole($role->id);
-                $result['status'] = 'success';
+                $result['result']['role'] = $roleService->deleteRole();
+                $result['status'] = $roleService->getStatus();
                 return Response::json($result);
             });
             
@@ -133,6 +135,7 @@ class RoleController extends Controller
 
     public function getPermissions($roleId,RoleService $roleService)
     {
+        $roleService->setRole($roleId);
         $result = [];
         $result['status'] = 'success';
         $result['result'] = [];

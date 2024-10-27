@@ -433,6 +433,7 @@ $(window).on('beforeunload onbeforeunload', function () {
 });
 
 function validateCallCenterTab() {
+        return 1;
         var win_id_cookie_duration = 10; // in seconds
         if (!window.name) {
                 window.name = Math.random().toString();
