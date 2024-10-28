@@ -2,10 +2,12 @@
 
 namespace App\APIServices;
 
+use App\Notifications\PasswordChanged;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\User;
 use App\Traits\HelperTrait;
+
 
 class UserService
 {
@@ -96,4 +98,10 @@ class UserService
         $roles =  $this->user->roles;
         return $roles;
     }
+    public function notifyPasswordChange()
+    {
+        $this->user->notify(new PasswordChanged());
+    }
+
+
 }

@@ -96,6 +96,10 @@ class UserController extends Controller
                 $userService->assignRoles($request->roles);
                 $result['result']['user'] = $userService->getUser();
                 $result['status'] = $userService->getStatus();
+                if($request->filled('password'))
+                {
+                    $userService->notifyPasswordChange();
+                }
                 return Response::json($result);
             });
             
