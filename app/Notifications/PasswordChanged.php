@@ -16,9 +16,10 @@ class PasswordChanged extends Notification
      *
      * @return void
      */
-    public function __construct()
+    protected $password;
+    public function __construct($password)
     {
-        //
+        $this->password = $password;
     }
 
     /**
@@ -62,7 +63,7 @@ class PasswordChanged extends Notification
     public function toDatabase($notifiable)
 {
     return [
-        'data' =>'Your Password has been Changed'
+        'data' =>'Your Password has been Changed. New Password: '.$this->password
     ];
 }
 }

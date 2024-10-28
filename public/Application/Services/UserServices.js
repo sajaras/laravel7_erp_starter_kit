@@ -160,7 +160,7 @@ class UserService {
         else {
             allrows.push("<tr><td colspan='4' class='text-center'>No Records Found</td></tr>");
             userObj.userTableCluster.update(allrows);
-           
+
         }
 
     }
@@ -357,6 +357,8 @@ class UserService {
 
     }
 
+   
+
     showDeleteUserPrompt($userId, $displayName, callback) {
         var $userObj = this;
         Swal.fire({
@@ -406,6 +408,71 @@ class UserService {
             //  icon: 'success',
             title: 'User Deleted Successfully',
             html: 'User <span class="text-danger">' + $displayName + '</span> has been deleted',
+            timer: 2000,
+            timerProgressBar: true,
+        });
+    }
+
+
+    promptAndResetPassword($userId, $displayName) {
+        this.showUserPasswordChangePrompt($userId, $displayName, function ($userId, $userObj, $displayName) {
+            $userObj.ChangePassword($userId, $displayName, function ($user, $userObj, $displayName) {
+                $userObj.ChangePasswordSuccessMessage($displayName);
+            }, $userObj.displayError);
+
+        });
+
+    }
+
+
+    showUserPasswordChangePrompt($userId, $displayName, callback) {
+        var $userObj = this;
+        Swal.fire({
+            title: 'Are you sure to Reset Password of the User ' + $displayName,
+            text: "You won't be able to revert this!",
+            // icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Reset it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                callback($userId, $userObj, $displayName);
+
+                // this.deleteUser();
+                // Swal.fire(
+                //     'Deleted!',
+                //     'Your file has been deleted.',
+                //     'success'
+                // )
+            }
+        });
+    }
+
+    ChangePassword($userId, $displayName, callback, errorcallback) {
+
+        var userObj = this;
+        return ajax_request_formless({ url: '/api/users/' + $userId + '/resetpassword',data:{autoGeneratePassword:'yes'}, headers: getapiRequestheaders(), method: 'post' }, function (response) {
+
+            console.log("passwordChangeResponse", response);
+
+            if (response.status == 'success') {
+
+                callback(response.result.user, userObj,response.result.password);
+
+            }
+            else if (response.status == 'error') {
+                errorcallback(response, userObj);
+            }
+
+
+        });
+    }
+    ChangePasswordSuccessMessage($password) {
+        Swal.fire({
+            //  icon: 'success',
+            title: 'User Password Reset Successfully',
+            html: 'Password : ' + $password ,
             timer: 2000,
             timerProgressBar: true,
         });

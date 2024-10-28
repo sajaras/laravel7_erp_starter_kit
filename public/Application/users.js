@@ -21,6 +21,7 @@ var userServiceParams = {
 
     deleteForm: '#deleteUserForm',
     deleteButtonClass: '.deleteButton',
+    resetPasswordButtonClass: '.resetPasswordButton',
 
 
 
@@ -84,6 +85,12 @@ console.log(roleService.getRoles());
     $(document).on('click', userServiceParams.deleteButtonClass, function () {
         var $row = $(this).closest('tr');
         userService.promptAndDeleteUser($row.find('.editid').val(), $row.find('.deleteDisplay').val());
+
+    });
+
+    $(document).on('click', userServiceParams.resetPasswordButtonClass, function () {
+        var $row = $(this).closest('tr');
+        userService.promptAndResetPassword($row.find('.editid').val(), $row.find('.deleteDisplay').val());
 
     });
 

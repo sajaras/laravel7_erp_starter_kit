@@ -26,6 +26,7 @@ Create New User
 </form>
 <form id="addUserForm" class="form-horizontal" autocomplete="ignore">
     {{csrf_field()}}
+    <input type="hidden" name="autoGeneratePassword" value="yes">
 
     @component('bladecomponents.form-tabs')
     @slot('represents')@endslot
@@ -58,6 +59,8 @@ Create New User
             Phone Number</span>
         <input type="text" class="form-control" placeholder="Enter Phone Number" name="phone_number" aria-label="phone_number">
     </div>
+
+   
     
     @endslot
 
@@ -209,6 +212,7 @@ erpModal
         <td>
             <button type="button" title="Edit User" class="editButton"> @component('svg_icons.edit1') @slot('width') 18 @endslot @slot('height') 18 @endslot  @endcomponent</button>
             <button type="button"  title="Delete User" class="ms-2 deleteButton"> @component('svg_icons.delete') @slot('width') 18 @endslot @slot('height') 18 @endslot  @endcomponent
+            <button type="button"  title="Reset Password" class="ms-2 resetPasswordButton"> @component('svg_icons.resetpassword') @slot('width') 18 @endslot @slot('height') 18 @endslot  @endcomponent
             
 
         </td>

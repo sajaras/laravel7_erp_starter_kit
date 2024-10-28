@@ -149,4 +149,22 @@ class UserController extends Controller
         return $result;
 
     }
+    public function resetPassword($userId,Request $request,UserService $userService)
+    {
+        $result = [];
+        $result['result'] = [];
+        $userService->setUser($userId);
+        $userService->changePassword($request);
+        $result['result']['user'] = $userService->getUser();
+        $result['result']['password'] = $userService->getPassword();
+        $result['status'] =  $userService->getStatus();
+        if($result['status'] == 'success')
+        {
+            $userService->notifyPasswordChange();
+        }
+        return $result;
+
+    }
+
+
 }

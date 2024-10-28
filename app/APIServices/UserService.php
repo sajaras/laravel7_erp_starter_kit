@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\User;
 use App\Traits\HelperTrait;
-
+use Auth;
 
 class UserService
 {
@@ -38,7 +38,6 @@ class UserService
     }
 
 
-
     public function setUser($userId)
     {
         $this->user = User::find($userId);
@@ -54,7 +53,7 @@ class UserService
         $this->user->phone_number = $request->phone_number;
         if ($request->has('autoGeneratePassword')) {
             $this->password = $this->generateRandomPassword();
-        } else {
+        } else if ($request->filled('password')) {
             $this->password = $request->password;
         }
         $this->user->password = bcrypt($this->password);
@@ -76,9 +75,6 @@ class UserService
         $this->user->name = $request->name;
         $this->user->email = $request->email;
         $this->user->phone_number = $request->phone_number;
-        if ($request->has('autoGeneratePassword')) {
-            $this->password = $this->generateRandomPassword();
-        }
         $out  = $this->user->save();
         if ($out) {
             $this->status = 'success';
@@ -98,9 +94,33 @@ class UserService
         $roles =  $this->user->roles;
         return $roles;
     }
+
+    public function changePassword($request)
+    {
+        if ($request->has('autoGeneratePassword') && $request->autoGeneratePassword == 'yes') {
+            $this->password = $this->generateRandomPassword();
+        } else if ($request->filled('password')) {
+            $this->password = $request->password;
+        }
+        $this->user->password = bcrypt($this->password);
+        if($this->user->save())
+        {
+            $this->status = 'success';
+        }
+    }
+
     public function notifyPasswordChange()
     {
-        $this->user->notify(new PasswordChanged());
+        $this->user->notify(new PasswordChanged($this->password));
+    }
+    public function getUnreadNotifications()
+    {
+        return $this->user->unreadNotifications;
+    }
+
+    public function getAuthenticatedUser()
+    {
+        return Auth::guard('api')->user();
     }
 
 

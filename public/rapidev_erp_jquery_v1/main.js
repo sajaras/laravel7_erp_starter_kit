@@ -1089,16 +1089,70 @@ function redirectToLogin() {
 
 
 
-function checkLogin()
-{
-    var access_token = getCookie('access_token');
-    ajax_request_formless({url:'/api/user',headers:getapiRequestheaders(),method:'get',data:{}},function(result)
-    {
-            if(result.id)
-            {
-                redirectToHome();
-            }
-    });
+function checkLogin() {
+        var access_token = getCookie('access_token');
+        ajax_request_formless({ url: '/api/user', headers: getapiRequestheaders(), method: 'get', data: {} }, function (result) {
+                if (result.id) {
+                        redirectToHome();
+                }
+        });
 
+}
+
+function camelToWords(string) {
+        var outstring = '';
+        for (let ic = 0; ic < string.length; ic++) {
+                if (ic!=0 && checkCase(string[ic]) == 'Uppercase') {
+                        outstring = outstring +  ' ' + string[ic];
+                }
+                else{
+                        outstring = outstring +  string[ic];   
+                }
+        }
+    return outstring;    
+}
+
+function diffTime(date2,date1)
+{
+var rem;
+var diffTime = Math.abs(date2 - date1);
+var diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); 
+rem = diffTime - (diffDays * (1000 * 60 * 60 * 24));
+var hours = Math.floor(rem / (1000 * 60 * 60)); 
+rem = rem  - hours * (1000 * 60 * 60);
+var mins =  Math.floor(rem / (1000 * 60));
+rem = rem  - mins * (1000 * 60 );
+var seconds = Math.floor(rem / (1000));
+var text = '';
+if(diffDays > 0 )
+{
+        text +=    diffDays + ' day ';
+}
+if(hours > 0 )
+{
+        text +=    hours + 'h ';
+}
+if(mins > 0 )
+{
+        text +=    mins + 'min ';
+}
+if(seconds > 0 )
+{
+        text +=    seconds + 's';
+}
+
+return {days:diffDays,hours:hours,mins:mins,seconds:seconds,text:text};
+}
+
+function checkCase(character) {
+        if (character ===
+                character.toUpperCase()) {
+                return 'Uppercase';
+        } else if (character ===
+                character.toLowerCase()) {
+                return 'Lowercase';
+        } else {
+                return 'Mixed case';
+        }
 }
 
