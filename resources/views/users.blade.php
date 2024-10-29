@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+
+@section('title')
+Users
+
+@endsection
+
 @section('pagemodals')
 
 @component('bladecomponents.modal')

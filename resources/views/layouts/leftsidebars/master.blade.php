@@ -1,3 +1,6 @@
+@php
+ $currentRouteName  = \Request::route()->getName();
+@endphp
 <nav id="sidebar">
 
 <div class="navbar-nav theme-brand flex-row  text-center">
@@ -65,15 +68,11 @@
         </svg><span>Data</span></div>
     </li>
 
-    <li class="menu active">
+    <li class="menu @if($currentRouteName == 'home') active @endif">
         <a href="{{route('home')}}" aria-expanded="false" class="dropdown-toggle">
             <div class="">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                </svg>
+            @component('svg_icons.dashboard') @slot('width')24 @endslot @slot('height') 24 @endslot @endcomponent
+
                 <span>Dashboard</span>
             </div>
         </a>
@@ -87,16 +86,16 @@
             </svg><span>Authentication </span></div>
     </li>
 
-    <li class="menu">
+    <li class="menu @if($currentRouteName == 'users') active @endif">
         <a href="{{route('users')}}" aria-expanded="false" class="dropdown-toggle">
             <div class="">
-            @component('svg_icons.users') @slot('width')24 @endslot @slot('height') 24 @endslot @endcomponent
+            @component('svg_icons.users2') @slot('width')24 @endslot @slot('height') 24 @endslot @endcomponent
                 <span>Users</span>
             </div>
         </a>
     </li>
 
-    <li class="menu">
+    <li class="menu @if($currentRouteName == 'roles') active @endif">
         <a href="{{route('roles')}}" aria-expanded="false" class="dropdown-toggle">
             <div class="">
             @component('svg_icons.roles') @slot('width')24 @endslot @slot('height') 24 @endslot @endcomponent
@@ -104,31 +103,27 @@
             </div>
         </a>
     </li>
-    <li class="menu">
+    <li class="menu @if($currentRouteName == 'permissions') active @endif">
         <a href="{{route('permissions')}}" aria-expanded="false" class="dropdown-toggle">
             <div class="">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
+            @component('svg_icons.permissions3') @slot('width')24 @endslot @slot('height') 24 @endslot @endcomponent
+
                 <span>Permissions</span>
             </div>
         </a>
     </li>
 
     <li class="menu menu-heading">
-        <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg><span>Logs </span></div>
+        <div class="heading">
+       
+            <span>Logs </span></div>
     </li>
 
-    <li class="menu">
-        <a href="{{route('permissions')}}" aria-expanded="false" class="dropdown-toggle">
+    <li class="menu @if($currentRouteName == 'auditlogs') active @endif">
+        <a href="{{route('auditlogs')}}" aria-expanded="false" class="dropdown-toggle">
             <div class="">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
+            @component('svg_icons.auditlog') @slot('width')24 @endslot @slot('height') 24 @endslot @endcomponent
+
                 <span>Audit Log</span>
             </div>
         </a>

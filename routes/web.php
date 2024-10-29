@@ -24,3 +24,4 @@ Route::get('/profile', 'AppController@profile')->name('profile');
 Route::get('/users', 'AppController@users')->name('users');
 Route::get('/roles', 'AppController@roles')->name('roles');
 Route::get('/permissions', 'AppController@permissions')->name('permissions');
+Route::get('/auditlogs', 'AppController@auditlogs')->name('auditlogs');
