@@ -2,8 +2,8 @@
 
 namespace App\APIServices;
 
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use App\Role;
+use App\Permission;
 use App\AppConstants;
 
 class RoleService

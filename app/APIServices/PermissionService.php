@@ -2,7 +2,7 @@
 
 namespace App\APIServices;
 
-use Spatie\Permission\Models\Permission;
+use App\Permission;
 use App\AppConstants;
 
 class PermissionService
