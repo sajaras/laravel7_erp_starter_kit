@@ -27,4 +27,8 @@ class AppController extends Controller
     {
         return view('permissions');
     }
+    public function auditlogs()
+    {
+        return view('auditlogs');
+    }
 }
