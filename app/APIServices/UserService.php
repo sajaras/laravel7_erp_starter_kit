@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use App\User;
 use App\Traits\HelperTrait;
 use Auth;
+use App\APIServices\AccountService;
 
 class UserService
 {
@@ -15,7 +16,12 @@ class UserService
     protected $user;
     protected $password;
     protected $status;
-    public function __construct() {}
+    protected $account;
+    public function __construct($accountId = null)
+    {
+        $accountService = new AccountService();
+        $this->account = $accountService->getAccountFromId($accountId);
+    }
 
     public function getAllUsers()
     {
@@ -57,6 +63,7 @@ class UserService
             $this->password = $request->password;
         }
         $this->user->password = bcrypt($this->password);
+        $this->user->account_id = $this->account->id;
         $out  = $this->user->save();
         if ($out) {
             $this->status = 'success';
@@ -71,21 +78,25 @@ class UserService
 
     public function updateUser($request)
     {
-
-        $this->user->name = $request->name;
-        $this->user->email = $request->email;
-        $this->user->phone_number = $request->phone_number;
-        $out  = $this->user->save();
-        if ($out) {
-            $this->status = 'success';
+        if ($this->account->id == $this->user->account_id) {
+            $this->user->name = $request->name;
+            $this->user->email = $request->email;
+            $this->user->phone_number = $request->phone_number;
+            $out  = $this->user->save();
+            if ($out) {
+                $this->status = 'success';
+            }
         }
     }
 
     public function deleteUser()
     {
-        $out  = $this->user->delete();
-        if ($out) {
-            $this->status = 'success';
+        if ($this->account->id == $this->user->account_id) {
+
+            $out  = $this->user->delete();
+            if ($out) {
+                $this->status = 'success';
+            }
         }
     }
 
@@ -97,15 +108,16 @@ class UserService
 
     public function changePassword($request)
     {
-        if ($request->has('autoGeneratePassword') && $request->autoGeneratePassword == 'yes') {
-            $this->password = $this->generateRandomPassword();
-        } else if ($request->filled('password')) {
-            $this->password = $request->password;
-        }
-        $this->user->password = bcrypt($this->password);
-        if($this->user->save())
-        {
-            $this->status = 'success';
+        if ($this->account->id == $this->user->account_id) {
+            if ($request->has('autoGeneratePassword') && $request->autoGeneratePassword == 'yes') {
+                $this->password = $this->generateRandomPassword();
+            } else if ($request->filled('password')) {
+                $this->password = $request->password;
+            }
+            $this->user->password = bcrypt($this->password);
+            if ($this->user->save()) {
+                $this->status = 'success';
+            }
         }
     }
 
@@ -122,6 +134,4 @@ class UserService
     {
         return Auth::guard('api')->user();
     }
-
-
 }
