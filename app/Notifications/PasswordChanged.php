@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Auth;
 
 class PasswordChanged extends Notification
 {
@@ -17,9 +18,12 @@ class PasswordChanged extends Notification
      * @return void
      */
     protected $password;
+    protected $account_id;
     public function __construct($password)
     {
         $this->password = $password;
+        $this->batch_id = 1;
+       
     }
 
     /**
